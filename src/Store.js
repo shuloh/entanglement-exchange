@@ -3,13 +3,17 @@ import React from "react";
 export const Store = React.createContext();
 
 const initialState = {
-  network: {},
-  user: {},
-  contract: {}
+  network: null,
+  account: null,
+  contract: null
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_NETWORK":
+      return { ...state, network: action.payload };
+    case "SET_ACCOUNT":
+      return { ...state, account: action.payload };
     case "SET_CONTRACT":
       return { ...state, contract: action.payload };
     default:

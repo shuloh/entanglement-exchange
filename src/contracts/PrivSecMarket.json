@@ -23,24 +23,30 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shuloh/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol\":\"PrivSecMarket\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shuloh/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol\":{\"keccak256\":\"0x1d94b6646a76ea43c937e81f674aa006518a0332c679d62e01db58c3a09e9b8f\",\"urls\":[\"bzz-raw://f5b183e3548aa2b1e7507038ff156c1f672c49cc82b17acc6ece4c301e407d8e\",\"dweb:/ipfs/QmVWS4eejvZKLYdAQZauCWEz24vgwZNyD1PdsDChRxXMSN\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50600080546001600160a01b031916331790556093806100306000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b6033604f565b604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b03168156fea265627a7a72315820242ac9478f109733a1bb3a9530e820e1fca18411545a3c91718780bdbc22a45264736f6c634300050c0032",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b6033604f565b604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b03168156fea265627a7a72315820242ac9478f109733a1bb3a9530e820e1fca18411545a3c91718780bdbc22a45264736f6c634300050c0032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shups/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol\":\"PrivSecMarket\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shups/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol\":{\"keccak256\":\"0x1d94b6646a76ea43c937e81f674aa006518a0332c679d62e01db58c3a09e9b8f\",\"urls\":[\"bzz-raw://f5b183e3548aa2b1e7507038ff156c1f672c49cc82b17acc6ece4c301e407d8e\",\"dweb:/ipfs/QmVWS4eejvZKLYdAQZauCWEz24vgwZNyD1PdsDChRxXMSN\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50600080546001600160a01b031916331790556093806100306000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b6033604f565b604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b03168156fea265627a7a72315820b4afc5143a088e221603928c9d414c68e768c7e411339ae131b6b2cf0b045b3764736f6c634300050c0032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b6033604f565b604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b03168156fea265627a7a72315820b4afc5143a088e221603928c9d414c68e768c7e411339ae131b6b2cf0b045b3764736f6c634300050c0032",
   "sourceMap": "25:103:1:-;;;76:50;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;103:5:1;:18;;-1:-1:-1;;;;;;103:18:1;111:10;103:18;;;25:103;;;;;;",
   "deployedSourceMap": "25:103:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:103:1;;;;;;;;;;;;;;;;;;;52:20;;;:::i;:::-;;;;-1:-1:-1;;;;;52:20:1;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;52:20:1;;:::o",
   "source": "pragma solidity 0.5.12;\n\ncontract PrivSecMarket {\n  address public owner;\n  constructor() public {\n    owner = msg.sender;\n  }\n}",
-  "sourcePath": "/home/shuloh/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
+  "sourcePath": "/home/shups/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
   "ast": {
-    "absolutePath": "/home/shuloh/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
+    "absolutePath": "/home/shups/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
     "exportedSymbols": {
-      "PrivSecMarket": [70]
+      "PrivSecMarket": [
+        70
+      ]
     },
     "id": 71,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 58,
-        "literals": ["solidity", "0.5", ".12"],
+        "literals": [
+          "solidity",
+          "0.5",
+          ".12"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:23:1"
       },
@@ -51,7 +57,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 70,
-        "linearizedBaseContracts": [70],
+        "linearizedBaseContracts": [
+          70
+        ],
         "name": "PrivSecMarket",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -185,16 +193,22 @@
     "src": "0:128:1"
   },
   "legacyAST": {
-    "absolutePath": "/home/shuloh/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
+    "absolutePath": "/home/shups/Code/consensys_bdp_project_smartcontracts/contracts/PrivSecMarket.sol",
     "exportedSymbols": {
-      "PrivSecMarket": [70]
+      "PrivSecMarket": [
+        70
+      ]
     },
     "id": 71,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 58,
-        "literals": ["solidity", "0.5", ".12"],
+        "literals": [
+          "solidity",
+          "0.5",
+          ".12"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:23:1"
       },
@@ -205,7 +219,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 70,
-        "linearizedBaseContracts": [70],
+        "linearizedBaseContracts": [
+          70
+        ],
         "name": "PrivSecMarket",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -343,15 +359,15 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
-    "1570618406700": {
+    "1570717085560": {
       "events": {},
       "links": {},
-      "address": "0x958df7272238519de86928D7215E03f91bA52Dea",
-      "transactionHash": "0x59ac15d67730cfb4ac63ac320122c61d54476740068bdbb6f8dbbe6f5c26fd70"
+      "address": "0xca61E14b5D37A62a131d3cA87C978522238a20F2",
+      "transactionHash": "0x3d0f8ba23ad1d15b01847b5efd6f5203ab1e727b0c4d7c252f6562cacf4738d0"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-09T10:55:46.320Z",
+  "updatedAt": "2019-10-10T14:18:42.543Z",
   "devdoc": {
     "methods": {}
   },
