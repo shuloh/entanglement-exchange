@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container width="75%">
         <NavBar />
       </Container>
     </div>
