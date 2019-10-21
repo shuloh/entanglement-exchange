@@ -5,7 +5,11 @@ export const Store = React.createContext();
 const initialState = {
   network: null,
   account: null,
-  contract: null
+  contract: null,
+
+  sideBarOpen: false,
+  listedCompanies: [],
+  nListedCompanies: 0
 };
 
 function reducer(state, action) {
@@ -16,6 +20,12 @@ function reducer(state, action) {
       return { ...state, account: action.payload };
     case "SET_CONTRACT":
       return { ...state, contract: action.payload };
+    case "SIDE_DRAWER":
+      return { ...state, sideBarOpen: action.payload };
+    case "SET_NLISTEDCOMPANIES":
+      return { ...state, nListedCompanies: action.payload };
+    case "SET_LISTEDCOMPANIES":
+      return { ...state, listedCompanies: action.payload };
     default:
       return state;
   }
