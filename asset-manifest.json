@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/entanglement-exchange/static/css/main.34de6062.chunk.css",
+    "main.js": "/entanglement-exchange/static/js/main.9841148d.chunk.js",
+    "main.js.map": "/entanglement-exchange/static/js/main.9841148d.chunk.js.map",
+    "runtime-main.js": "/entanglement-exchange/static/js/runtime-main.5f5fa771.js",
+    "runtime-main.js.map": "/entanglement-exchange/static/js/runtime-main.5f5fa771.js.map",
+    "static/js/2.8c6b4b1b.chunk.js": "/entanglement-exchange/static/js/2.8c6b4b1b.chunk.js",
+    "static/js/2.8c6b4b1b.chunk.js.map": "/entanglement-exchange/static/js/2.8c6b4b1b.chunk.js.map",
+    "index.html": "/entanglement-exchange/index.html",
+    "precache-manifest.78f0078e7bbe7cabb8c598a7dd6a22af.js": "/entanglement-exchange/precache-manifest.78f0078e7bbe7cabb8c598a7dd6a22af.js",
+    "service-worker.js": "/entanglement-exchange/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/entanglement-exchange/static/css/main.34de6062.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5f5fa771.js",
+    "static/js/2.8c6b4b1b.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.9841148d.chunk.js"
+  ]
+}
