@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://shuloh.github.io",
+  "homepage": "https://shuloh.github.io/entanglement-exchange",
   "eslintConfig": {
     "extends": "react-app"
   },
