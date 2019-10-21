@@ -78,7 +78,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Private Securities Marketplace
+            Entanglement Exchange: ERC20 Marketplace
           </Typography>
           <FormGroup className={classes.connector}>
             <FormControlLabel
