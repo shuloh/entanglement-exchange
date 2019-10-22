@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/entanglement-exchange/precache-manifest.bd385592095ad981175202b6f83d850d.js"
+  "/entanglement-exchange/precache-manifest.f5fb82b24066594c18cb56ef1ea3b091.js"
 );
 
 self.addEventListener('message', (event) => {
