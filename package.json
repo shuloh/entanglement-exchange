@@ -11,6 +11,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "uuid": "^3.3.3",
+    "validator": "^11.1.0",
     "web3": "^1.2.1"
   },
   "scripts": {

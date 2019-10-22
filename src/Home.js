@@ -23,14 +23,13 @@ export default function Home() {
           .numberOfListedCompanies()
           .call({ from: state.account });
         for (var i = 0; i < nCompanies; i++) {
-          const cAddress = await state.contract.methods.listedCompanies.call(
-            i,
-            { from: state.account }
-          );
+          const cAddress = await state.contract.methods
+            .listedCompanies(i)
+            .call({ from: state.account });
           if (state.listedCompanies[cAddress]) {
             continue;
           } else {
-            const companyContract = await new state.web3.Contract(
+            const companyContract = new state.web3.eth.Contract(
               IPrivateCompany.abi,
               cAddress
             );

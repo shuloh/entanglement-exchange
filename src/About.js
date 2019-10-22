@@ -7,19 +7,19 @@ import PrivateExchangeProxy from "./contracts/PrivateExchangeProxy.json";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2)
+    padding: theme.spacing(3, 2),
+    width: "auto"
   }
 }));
 
 export default function About() {
   const classes = useStyles();
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const [contractAddress, setAddress] = useState("");
   const [contractOwner, setOwner] = useState("");
   const fetchContractDetails = async () => {
     if (state.contract) {
       const c = state.contract;
-      console.log(c);
       setAddress(c.options.address);
       const cOwner = await c.methods.owner().call({ from: state.account });
       setOwner(cOwner);
@@ -31,10 +31,12 @@ export default function About() {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Typography variant="h6">
+        <Typography variant="h6" noWrap>
           Exchange Contract Address: {contractAddress}
         </Typography>
-        <Typography variant="h6">Exchange Owner: {contractOwner}</Typography>
+        <Typography variant="h6" noWrap>
+          Exchange Owner: {contractOwner}
+        </Typography>
       </Paper>
     </React.Fragment>
   );

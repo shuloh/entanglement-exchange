@@ -76,7 +76,7 @@ export default function NavBar() {
             onChange={connectWeb3}
             aria-label="Connect"
           />{" "}
-          <Typography variant="body2">
+          <Typography variant="body2" noWrap>
             {state.account ? state.account : "Connect Web3"}
           </Typography>
         </Toolbar>

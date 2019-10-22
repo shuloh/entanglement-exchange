@@ -1687,7 +1687,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-22T00:16:48.814Z",
+  "updatedAt": "2019-10-22T12:14:20.910Z",
   "devdoc": {
     "details": "Extends from BaseAdminUpgradeabilityProxy with an initializer for  initializing the implementation, admin, and init data.",
     "methods": {
