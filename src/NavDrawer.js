@@ -9,15 +9,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AppsIcon from "@material-ui/icons/Apps";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import InfoIcon from "@material-ui/icons/Info";
+import PersonIcon from "@material-ui/icons/Person";
 
+import { Link } from "react-router-dom";
 import { Store } from "./Store";
 
 const useStyles = makeStyles(theme => ({
   list: {
     width: 250
-  },
-  fullList: {
-    width: "auto"
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -54,17 +54,25 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button key={"Home"}>
+        <ListItem button key={"Home"} component={Link} to="/">
           <ListItemIcon>
             <AppsIcon />
           </ListItemIcon>
           <ListItemText primary={"Home"} />
         </ListItem>
-        <ListItem button key={"Turn On"} onClick={switchOpenMode}>
+
+        <ListItem button key={"About"} component={Link} to="About">
           <ListItemIcon>
-            <AppsIcon />
+            <InfoIcon />
           </ListItemIcon>
-          <ListItemText primary={"Turn On"} />
+          <ListItemText primary={"About"} />
+        </ListItem>
+
+        <ListItem button key={"User"} component={Link} to="User">
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary={"User"} />
         </ListItem>
       </List>
       <Divider />

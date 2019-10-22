@@ -26,17 +26,21 @@ export default function NavBar() {
   const { state, dispatch } = useContext(Store);
   const connectWeb3 = async () => {
     try {
-      // Get network provider and web3 instance.
+      //store web3 for contract interaction in whole app
       const web3 = await getWeb3();
-      // Use web3 to get the user's accounts.
+      dispatch({
+        type: "SET_WEB3",
+        payload: web3
+      });
+
+      //store account for contract interaction in whole app
       const accounts = await web3.eth.getAccounts();
-      web3.eth.defaultAccount = accounts[0];
       dispatch({
         type: "SET_ACCOUNT",
         payload: accounts[0]
       });
 
-      // Get the contract instance.
+      //store networkId for contract interaction in whole app
       const networkId = await web3.eth.net.getId();
       dispatch({
         type: "SET_NETWORK",
@@ -47,27 +51,11 @@ export default function NavBar() {
         PrivateExchangeLogic.abi,
         deployedProxy.address
       );
+
+      //store contract
       dispatch({
         type: "SET_CONTRACT",
         payload: instance
-      });
-
-      const nListedCompanies = await instance.methods
-        .numberOfListedCompanies()
-        .call();
-      dispatch({
-        type: "SET_NLISTEDCOMPANIES",
-        payload: nListedCompanies
-      });
-
-      var listedCompanies = [];
-      for (var i = 0; i < nListedCompanies; i++) {
-        const privateCompany = await instance.methods.listedCompanies.call(i);
-        listedCompanies.push(privateCompany);
-      }
-      dispatch({
-        type: "SET_LISTEDCOMPANIES",
-        payload: listedCompanies
       });
     } catch (error) {
       // Catch any errors for any of the above operations.

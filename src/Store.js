@@ -3,17 +3,20 @@ import React from "react";
 export const Store = React.createContext();
 
 const initialState = {
+  web3: null,
   network: null,
   account: null,
   contract: null,
 
+  isAdmin: false,
   sideBarOpen: false,
-  listedCompanies: [],
-  nListedCompanies: 0
+  listedCompanies: { ExchangeToken: { name: "COMPANY-TEST", symbol: "COYT" } }
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_WEB3":
+      return { ...state, web3: action.payload };
     case "SET_NETWORK":
       return { ...state, network: action.payload };
     case "SET_ACCOUNT":
@@ -22,10 +25,14 @@ function reducer(state, action) {
       return { ...state, contract: action.payload };
     case "SIDE_DRAWER":
       return { ...state, sideBarOpen: action.payload };
-    case "SET_NLISTEDCOMPANIES":
-      return { ...state, nListedCompanies: action.payload };
-    case "SET_LISTEDCOMPANIES":
-      return { ...state, listedCompanies: action.payload };
+    case "ADD_LISTEDCOMPANY":
+      return {
+        ...state,
+        listedCompanies: {
+          ...state.listedCompanies,
+          [action.payload.key]: action.payload.value
+        }
+      };
     default:
       return state;
   }
