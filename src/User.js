@@ -11,6 +11,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Box from "@material-ui/core/Box";
+import getWeb3 from "./utils/getWeb3";
 
 import { Store } from "./Store";
 const useStyles = makeStyles(theme => ({
@@ -40,14 +41,29 @@ const useStyles = makeStyles(theme => ({
 export default function User() {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
-  const [user, setUser] = useState({ isAdmin: false });
+  const [user, setUser] = useState({
+    isAdmin: false,
+    balance: 0,
+    ownedCompanies: 0
+  });
   const [exchange, setExchange] = useState({ isOpen: false });
   useEffect(() => {
-    console.log("EFFECT");
-    const fetchIsLogicAdmin = async () => {
+    const fetchUserDetails = async () => {
+      const web3 = await getWeb3();
       const c = state.contract;
       const _isAdmin = await c.methods.isOwner().call({ from: state.account });
-      setUser({ ...user, isAdmin: _isAdmin });
+      const _balance = web3.utils.fromWei(
+        await c.methods.exchangeTokenBalance().call({ from: state.account })
+      );
+      const _ownedCompanies = await c.methods
+        .numberOfOwnedCompanies()
+        .call({ from: state.account });
+      setUser({
+        ...user,
+        isAdmin: _isAdmin,
+        balance: _balance,
+        ownedCompanies: _ownedCompanies
+      });
     };
     const fetchIsExchangeOpen = async () => {
       const c = state.contract;
@@ -55,7 +71,7 @@ export default function User() {
       setExchange({ ...exchange, isOpen: _isOpen });
     };
     if (state.contract && state.account) {
-      fetchIsLogicAdmin();
+      fetchUserDetails();
       fetchIsExchangeOpen();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.contract, state.account]);
@@ -144,8 +160,12 @@ export default function User() {
       symbol: "",
       price: 1
     });
-    const handleChange = name => event => {
+    const [buyEE, setBuyEE] = useState(0);
+    const handleNewCompany = name => event => {
       setNewCompany({ ...newCompany, [name]: event.target.value });
+    };
+    const handleBuyEE = name => event => {
+      setBuyEE(event.target.value);
     };
     const createNewCompanyAndListTransaction = () => {
       const f = async () => {
@@ -164,8 +184,29 @@ export default function User() {
       };
       f();
     };
+    const buyExchangeTokenTransaction = () => {
+      const f = async () => {
+        if (state.contract) {
+          const c = state.contract;
+          const web3 = await getWeb3();
+          await c.methods.buyExchangeToken().send({
+            from: state.account,
+            value: web3.utils.toWei(buyEE)
+          });
+        }
+      };
+      f();
+    };
     return (
       <React.Fragment>
+        <Paper className={classes.container}>
+          <Typography variant="h5" noWrap>
+            Account Details:
+          </Typography>
+          <Typography variant="h6" noWrap>
+            Balance: {user.balance} EE$
+          </Typography>
+        </Paper>
         <Paper className={classes.container}>
           <Typography variant="h6" noWrap>
             Create Company and List on Exchange
@@ -177,7 +218,7 @@ export default function User() {
                 label="Company Name"
                 className={classes.textField}
                 value={newCompany.name}
-                onChange={handleChange("name")}
+                onChange={handleNewCompany("name")}
                 margin="normal"
                 variant="outlined"
               />
@@ -188,7 +229,7 @@ export default function User() {
                 label="Company Symbol"
                 className={classes.textField}
                 value={newCompany.symbol}
-                onChange={handleChange("symbol")}
+                onChange={handleNewCompany("symbol")}
                 margin="normal"
                 variant="outlined"
               />
@@ -198,7 +239,7 @@ export default function User() {
                 id="PricePerShare"
                 label="Price per Share (EE$)"
                 value={newCompany.price}
-                onChange={handleChange("price")}
+                onChange={handleNewCompany("price")}
                 type="number"
                 className={classes.textField}
                 InputLabelProps={{
@@ -215,6 +256,40 @@ export default function User() {
                 variant="contained"
                 className={classes.button}
                 onClick={createNewCompanyAndListTransaction}
+              >
+                send
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+
+        <Paper className={classes.container}>
+          <Typography variant="h6" noWrap>
+            Buy Exchange Tokens (EE$)
+          </Typography>
+          <Grid container direction="row" alignItems="center" spacing={2}>
+            <Grid item zeroMinWidth>
+              <TextField
+                id="AmountofEE"
+                label="AmountOfEE"
+                value={buyEE}
+                onChange={handleBuyEE()}
+                type="number"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                margin="normal"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item zeroMinWidth>
+              <Button
+                color="primary"
+                size="large"
+                variant="contained"
+                className={classes.button}
+                onClick={buyExchangeTokenTransaction}
               >
                 send
               </Button>

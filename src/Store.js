@@ -7,10 +7,12 @@ const initialState = {
   network: null,
   account: null,
   contract: null,
+  exchangeStatus: false,
+  exchangeToken: null,
 
   isAdmin: false,
   sideBarOpen: false,
-  listedCompanies: { ExchangeToken: { name: "COMPANY-TEST", symbol: "COYT" } }
+  listedCompanies: {}
 };
 
 function reducer(state, action) {
@@ -25,6 +27,10 @@ function reducer(state, action) {
       return { ...state, contract: action.payload };
     case "SIDE_DRAWER":
       return { ...state, sideBarOpen: action.payload };
+    case "SET_EXCHANGE_STATUS":
+      return { ...state, exchangeStatus: action.payload };
+    case "SET_EXCHANGE_TOKEN":
+      return { ...state, exchangeToken: action.payload };
     case "ADD_LISTEDCOMPANY":
       return {
         ...state,

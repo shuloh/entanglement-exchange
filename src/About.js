@@ -15,27 +15,41 @@ const useStyles = makeStyles(theme => ({
 export default function About() {
   const classes = useStyles();
   const { state } = useContext(Store);
-  const [contractAddress, setAddress] = useState("");
-  const [contractOwner, setOwner] = useState("");
-  const fetchContractDetails = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      setAddress(c.options.address);
-      const cOwner = await c.methods.owner().call({ from: state.account });
-      setOwner(cOwner);
-    }
-  };
-  useEffect(() => {
-    fetchContractDetails();
+  const [exchange, setInfo] = useState({
+    address: null,
+    owner: null,
+    status: false
   });
+  useEffect(() => {
+    console.log("EFFECT");
+    const fetchContractDetails = async () => {
+      if (state.contract) {
+        const ex = state.contract;
+        const exOwner = await ex.methods.owner().call({ from: state.account });
+        const exStatus = await ex.methods
+          .isOpen()
+          .call({ from: state.account });
+        setInfo({
+          ...exchange,
+          address: ex.options.address,
+          owner: exOwner,
+          status: exStatus
+        });
+      }
+    };
+    fetchContractDetails();
+  }, [state.contract, state.account]);
   return (
     <React.Fragment>
       <Paper className={classes.root}>
         <Typography variant="h6" noWrap>
-          Exchange Contract Address: {contractAddress}
+          Exchange Contract Address: {exchange.address}
         </Typography>
         <Typography variant="h6" noWrap>
-          Exchange Owner: {contractOwner}
+          Exchange Owner: {exchange.owner}
+        </Typography>
+        <Typography variant="h6" noWrap>
+          Exchange Status: {exchange.status ? "Open" : "Closed"}
         </Typography>
       </Paper>
     </React.Fragment>
