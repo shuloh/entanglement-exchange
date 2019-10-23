@@ -5,9 +5,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    background: theme.palette.secondary.dark
   },
   bullet: {
     display: "inline-block",
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12
   }
-});
+}));
 
 export default function ListedCompanyCard(props) {
   const classes = useStyles();

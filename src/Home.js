@@ -9,7 +9,7 @@ import ListedCompaniesGrid from "./ListedCompaniesGrid";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2)
+    padding: theme.spacing(3, 2, 2, 2)
   }
 }));
 export default function Home() {
