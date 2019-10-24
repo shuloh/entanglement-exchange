@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
+import { Store } from "./Store";
 const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275,
+    maxWidth: 275,
     background: theme.palette.secondary.dark
   },
   bullet: {
@@ -25,18 +25,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListedCompanyCard(props) {
   const classes = useStyles();
+  const { state } = useContext(Store);
 
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography variant="h5" component="h2">
-          {props.companyDescr.symbol}
+        <Typography variant="h5">
+          {state.exchangeCompanies[props.address].symbol}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {props.companyDescr.name}
+        <Typography variant="h6" className={classes.pos} color="textSecondary">
+          {state.exchangeCompanies[props.address].name}
         </Typography>
-        <Typography variant="body2" component="p">
-          {props.companyDescr.address}
+        <Typography variant="body2" noWrap>
+          Address: {props.address}
+          {<br />}
+          Price/Share: {state.exchangeCompanies[props.address].pricePerShare}
+          {<br />}
+          Shares for Sale:{" "}
+          {state.exchangeCompanies[props.address].sharesForSale}
         </Typography>
       </CardContent>
       <CardActions>

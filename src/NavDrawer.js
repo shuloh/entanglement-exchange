@@ -40,12 +40,6 @@ export default function TemporaryDrawer() {
       payload: open
     });
   };
-  const switchOpenMode = async () => {
-    if (state.contract !== null) {
-      await state.contract.methods.switchOpenMode(true).send();
-    }
-  };
-
   const sideList = side => (
     <div
       className={classes.list}

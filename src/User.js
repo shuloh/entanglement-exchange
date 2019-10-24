@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +11,6 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Box from "@material-ui/core/Box";
-import getWeb3 from "./utils/getWeb3";
 
 import { Store } from "./Store";
 const useStyles = makeStyles(theme => ({
@@ -40,57 +39,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function User() {
   const classes = useStyles();
-  const { state, dispatch } = useContext(Store);
-  const [user, setUser] = useState({
-    isAdmin: false,
-    balance: 0,
-    ownedCompanies: 0
-  });
-  const [exchange, setExchange] = useState({ isOpen: false });
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      const web3 = await getWeb3();
-      const c = state.contract;
-      const _isAdmin = await c.methods.isOwner().call({ from: state.account });
-      const _balance = web3.utils.fromWei(
-        await c.methods.exchangeTokenBalance().call({ from: state.account })
-      );
-      const _ownedCompanies = await c.methods
-        .numberOfOwnedCompanies()
-        .call({ from: state.account });
-      setUser({
-        ...user,
-        isAdmin: _isAdmin,
-        balance: _balance,
-        ownedCompanies: _ownedCompanies
-      });
-    };
-    const fetchIsExchangeOpen = async () => {
-      const c = state.contract;
-      const _isOpen = await c.methods.isOpen().call({ from: state.account });
-      setExchange({ ...exchange, isOpen: _isOpen });
-    };
-    if (state.contract && state.account) {
-      fetchUserDetails();
-      fetchIsExchangeOpen();
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.contract, state.account]);
+  const { state } = useContext(Store);
 
   const AdminCapabilities = () => {
-    const [openMode, setOpenMode] = useState(false);
+    const { state, dispatch } = useContext(Store);
     const switchOpenMode = event => {
-      setOpenMode(event.target.value);
+      dispatch({ type: "SET_ADMIN_OPENMODE", payload: event.target.value });
     };
-    const switchOpenModeTransaction = () => {
-      const f = async () => {
-        if (state.contract) {
-          const c = state.contract;
-          await c.methods.switchOpenMode(openMode).send({
-            from: state.account
-          });
-        }
-      };
-      f();
+    const switchOpenModeTransaction = async () => {
+      const c = state.contract;
+      await c.methods.switchOpenMode(state.transactAdminOpenMode).send();
     };
     return (
       <React.Fragment>
@@ -116,7 +74,7 @@ export default function User() {
                     select
                     label="Select"
                     className={classes.textField}
-                    value={openMode}
+                    value={state.transactAdminOpenMode}
                     SelectProps={{
                       MenuProps: {
                         className: classes.menu
@@ -155,17 +113,16 @@ export default function User() {
     );
   };
   const UserCapabilities = () => {
-    const [newCompany, setNewCompany] = useState({
-      name: "",
-      symbol: "",
-      price: 1
-    });
-    const [buyEE, setBuyEE] = useState(0);
+    const { state, dispatch } = useContext(Store);
     const handleNewCompany = name => event => {
-      setNewCompany({ ...newCompany, [name]: event.target.value });
+      dispatch({
+        type: "SET_USER_NEWCOMPANY",
+        subtype: name,
+        payload: event.target.value
+      });
     };
     const handleBuyEE = name => event => {
-      setBuyEE(event.target.value);
+      dispatch({ type: "SET_USER_BUYEE", payload: event.target.value });
     };
     const createNewCompanyAndListTransaction = () => {
       const f = async () => {
@@ -173,13 +130,12 @@ export default function User() {
           const c = state.contract;
           await c.methods
             .createCompanyAndList(
-              newCompany.name,
-              newCompany.symbol,
-              newCompany.price
+              state.transactNewCompanyName,
+              state.transactNewCompanySymbol,
+              state.transactNewCompanyPrice
             )
-            .send({
-              from: state.account
-            });
+            .send();
+          dispatch({ type: "CLEAR_USER_NEWCOMPANY" });
         }
       };
       f();
@@ -188,10 +144,8 @@ export default function User() {
       const f = async () => {
         if (state.contract) {
           const c = state.contract;
-          const web3 = await getWeb3();
           await c.methods.buyExchangeToken().send({
-            from: state.account,
-            value: web3.utils.toWei(buyEE)
+            value: state.web3.utils.toWei(state.transactBuyEE.toString())
           });
         }
       };
@@ -204,7 +158,11 @@ export default function User() {
             Account Details:
           </Typography>
           <Typography variant="h6" noWrap>
-            Balance: {user.balance} EE$
+            Balance:
+            {state.userBalance
+              ? state.web3.utils.fromWei(state.userBalance)
+              : "-"}
+            EE$
           </Typography>
         </Paper>
         <Paper className={classes.container}>
@@ -217,7 +175,7 @@ export default function User() {
                 id="CompanyName"
                 label="Company Name"
                 className={classes.textField}
-                value={newCompany.name}
+                value={state.transactNewCompanyName}
                 onChange={handleNewCompany("name")}
                 margin="normal"
                 variant="outlined"
@@ -228,7 +186,7 @@ export default function User() {
                 id="CompanySymbol"
                 label="Company Symbol"
                 className={classes.textField}
-                value={newCompany.symbol}
+                value={state.transactNewCompanySymbol}
                 onChange={handleNewCompany("symbol")}
                 margin="normal"
                 variant="outlined"
@@ -238,9 +196,10 @@ export default function User() {
               <TextField
                 id="PricePerShare"
                 label="Price per Share (EE$)"
-                value={newCompany.price}
+                value={state.transactNewCompanyPrice}
                 onChange={handleNewCompany("price")}
                 type="number"
+                step="0.01"
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -272,9 +231,10 @@ export default function User() {
               <TextField
                 id="AmountofEE"
                 label="AmountOfEE"
-                value={buyEE}
+                value={state.transactBuyEE}
                 onChange={handleBuyEE()}
                 type="number"
+                inputProps={{ step: "0.01", min: "0.01" }}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -302,8 +262,8 @@ export default function User() {
   return (
     <React.Fragment>
       <Box className={classes.root}>
-        {state.contract && user.isAdmin && <AdminCapabilities />}
-        {state.contract && <UserCapabilities />}{" "}
+        {state.userIsAdmin && <AdminCapabilities />}
+        {state.contract && <UserCapabilities />}
       </Box>
     </React.Fragment>
   );

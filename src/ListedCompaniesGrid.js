@@ -29,12 +29,9 @@ export default function ListedCompaniesGrid() {
         alignItems="flex-start"
         spacing={2}
       >
-        {Object.keys(state.listedCompanies).map((value, index) => (
+        {Object.keys(state.exchangeCompanies).map((value, index) => (
           <Grid key={index} item>
-            <ListedCompanyCard
-              className={classes.paper}
-              companyDescr={state.listedCompanies[value]}
-            />
+            <ListedCompanyCard className={classes.paper} address={value} />
           </Grid>
         ))}
       </Grid>

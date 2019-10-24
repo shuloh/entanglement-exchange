@@ -22,11 +22,11 @@ export default function Home() {
         const nCompanies = await state.contract.methods
           .numberOfListedCompanies()
           .call({ from: state.account });
-        for (var i = 0; i < nCompanies; i++) {
+        for (let i = 0; i < nCompanies; i++) {
           const cAddress = await state.contract.methods
             .listedCompanies(i)
             .call({ from: state.account });
-          if (state.listedCompanies[cAddress]) {
+          if (state.exchangeCompanies[cAddress]) {
             continue;
           } else {
             const companyContract = new state.web3.eth.Contract(
@@ -40,7 +40,7 @@ export default function Home() {
               .symbol()
               .call({ from: state.account });
             dispatch({
-              type: "ADD_LISTEDCOMPANY",
+              type: "ADD_EXCHANGELISTEDCOMPANY",
               payload: {
                 key: cAddress,
                 value: {
