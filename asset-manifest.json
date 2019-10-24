@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/entanglement-exchange/static/css/main.34de6062.chunk.css",
-    "main.js": "/entanglement-exchange/static/js/main.4213be62.chunk.js",
-    "main.js.map": "/entanglement-exchange/static/js/main.4213be62.chunk.js.map",
+    "main.js": "/entanglement-exchange/static/js/main.853072df.chunk.js",
+    "main.js.map": "/entanglement-exchange/static/js/main.853072df.chunk.js.map",
     "runtime-main.js": "/entanglement-exchange/static/js/runtime-main.1166b21c.js",
     "runtime-main.js.map": "/entanglement-exchange/static/js/runtime-main.1166b21c.js.map",
-    "static/js/2.2713f910.chunk.js": "/entanglement-exchange/static/js/2.2713f910.chunk.js",
-    "static/js/2.2713f910.chunk.js.map": "/entanglement-exchange/static/js/2.2713f910.chunk.js.map",
+    "static/js/2.d1a5e3a1.chunk.js": "/entanglement-exchange/static/js/2.d1a5e3a1.chunk.js",
+    "static/js/2.d1a5e3a1.chunk.js.map": "/entanglement-exchange/static/js/2.d1a5e3a1.chunk.js.map",
     "index.html": "/entanglement-exchange/index.html",
-    "precache-manifest.2e0864046dad0b184be9cb80febe2a2d.js": "/entanglement-exchange/precache-manifest.2e0864046dad0b184be9cb80febe2a2d.js",
+    "precache-manifest.d31a9ffb05b40eabe82b5989b7a54614.js": "/entanglement-exchange/precache-manifest.d31a9ffb05b40eabe82b5989b7a54614.js",
     "service-worker.js": "/entanglement-exchange/service-worker.js",
     "static/css/main.34de6062.chunk.css.map": "/entanglement-exchange/static/css/main.34de6062.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.1166b21c.js",
-    "static/js/2.2713f910.chunk.js",
+    "static/js/2.d1a5e3a1.chunk.js",
     "static/css/main.34de6062.chunk.css",
-    "static/js/main.4213be62.chunk.js"
+    "static/js/main.853072df.chunk.js"
   ]
 }
