@@ -27,7 +27,7 @@ export default function About() {
           Exchange Owner: {state.exchangeOwner}
         </Typography>
         <Typography variant="body2" noWrap>
-          Exchange Token:{" "}
+          Exchange Token:
           {state.exchangeToken ? state.exchangeToken.options.address : ""}
         </Typography>
         <Typography variant="body2" noWrap>

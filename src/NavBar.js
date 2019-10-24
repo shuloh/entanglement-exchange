@@ -89,15 +89,20 @@ export default function NavBar() {
     const _owner = await c.methods.owner().call();
     dispatch({ type: "SET_EXCHANGE_OWNER", payload: _owner });
     const _token = await c.methods.exchangeToken().call();
+    console.log(_token);
     const _tokenContract = new web3.eth.Contract(PrivateCompany.abi, _token, {
       from: account
     });
+    console.log(_tokenContract);
     dispatch({
       type: "SET_EXCHANGE_TOKEN",
       payload: _tokenContract
     });
     const _numberCompanies = await c.methods.numberOfListedCompanies().call();
-    dispatch({ type: "SET_EXCHANGE_NUMBERCOMPANIES", payload: _token });
+    dispatch({
+      type: "SET_EXCHANGE_NUMBERCOMPANIES",
+      payload: _numberCompanies
+    });
     for (let i = 0; i < _numberCompanies; i++) {
       const listedCompanyAddress = await c.methods.listedCompanies(i).call();
       const companyContract = new web3.eth.Contract(
