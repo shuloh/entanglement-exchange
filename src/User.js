@@ -48,14 +48,11 @@ const UserCapabilities = () => {
   const createNewCompanyAndListTransaction = async () => {
     if (state.contract) {
       const c = state.contract;
-      const priceInWei = state.web3.utils.toWei(
-        state.transactNewCompanyPrice.toString()
-      );
       await c.methods
         .createCompanyAndList(
           state.transactNewCompanyName,
           state.transactNewCompanySymbol,
-          priceInWei
+          state.web3.utils.toWei(state.transactNewCompanyPrice.toString())
         )
         .send();
       dispatch({ type: "CLEAR_USER_NEWCOMPANY" });
@@ -121,7 +118,7 @@ const UserCapabilities = () => {
               <Grid item zeroMinWidth>
                 <TextField
                   id="PricePerShare"
-                  label="Price per Share (EE$)"
+                  label="Price per 1.0 unit share (EE$)"
                   value={state.transactNewCompanyPrice}
                   onChange={handleNewCompany("price")}
                   type="number"
@@ -163,7 +160,7 @@ const UserCapabilities = () => {
                   value={state.transactBuyEE}
                   onChange={handleBuyEE()}
                   type="number"
-                  inputProps={{ step: "0.01", min: "0.01" }}
+                  inputProps={{ step: "0.01", min: "0.00000000000000000 1" }}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true
@@ -203,8 +200,8 @@ const AdminCapabilities = () => {
   return (
     <React.Fragment>
       <Paper className={classes.container}>
-        <Typography variant="h6">
-          You are the administrator of this exchange.
+        <Typography variant="h5" noWrap>
+          Administrator:
         </Typography>
         <Typography variant="h6" noWrap>
           Open Exchange?

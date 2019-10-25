@@ -39,7 +39,10 @@ export default function ListedCompanyCard(props) {
         <Typography variant="body2" noWrap>
           Address: {props.address}
           {<br />}
-          Price/Share: {state.exchangeCompanies[props.address].pricePerShare}
+          Price/Share:{" "}
+          {state.web3.utils.fromWei(
+            state.exchangeCompanies[props.address].pricePerShare
+          )}
           {<br />}
           Shares for Sale:{" "}
           {state.exchangeCompanies[props.address].sharesForSale}

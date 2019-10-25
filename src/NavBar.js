@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import getWeb3 from "./utils/getWeb3";
 import TemporaryDrawer from "./NavDrawer";
 import PrivateExchangeProxy from "./contracts/PrivateExchangeProxy.json";
@@ -20,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
+  },
+  label: {
+    noWrap: "true",
+    color: "#FE6B8B"
   }
 }));
 
@@ -147,16 +152,21 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title} noWrap>
             Entanglement-Exchange
           </Typography>
-          <Switch
-            color="primary"
-            checked={state.account !== null}
-            disabled={state.account !== null}
-            onChange={connectWeb3}
-            aria-label="Connect"
+          <FormControlLabel
+            classes={{
+              label: classes.label // class name, e.g. `classes-nesting-label-x`
+            }}
+            control={
+              <Switch
+                color="default"
+                checked={state.account !== null}
+                disabled={state.account !== null}
+                onChange={connectWeb3}
+                aria-label="Connect"
+              />
+            }
+            label={state.account ? state.account : "Connect Web3"}
           />
-          <Typography variant="body2" noWrap>
-            {state.account ? state.account : "Connect Web3"}
-          </Typography>
         </Toolbar>
       </AppBar>
     </React.Fragment>
