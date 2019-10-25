@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -45,139 +45,148 @@ const UserCapabilities = () => {
   const handleBuyEE = name => event => {
     dispatch({ type: "SET_USER_BUYEE", payload: event.target.value });
   };
-  const createNewCompanyAndListTransaction = () => {
-    const f = async () => {
-      if (state.contract) {
-        const c = state.contract;
-        await c.methods
-          .createCompanyAndList(
-            state.transactNewCompanyName,
-            state.transactNewCompanySymbol,
-            state.transactNewCompanyPrice
-          )
-          .send();
-        dispatch({ type: "CLEAR_USER_NEWCOMPANY" });
-      }
-    };
-    f();
+  const createNewCompanyAndListTransaction = async () => {
+    if (state.contract) {
+      const c = state.contract;
+      const priceInWei = state.web3.utils.toWei(
+        state.transactNewCompanyPrice.toString()
+      );
+      await c.methods
+        .createCompanyAndList(
+          state.transactNewCompanyName,
+          state.transactNewCompanySymbol,
+          priceInWei
+        )
+        .send();
+      dispatch({ type: "CLEAR_USER_NEWCOMPANY" });
+    }
   };
-  const buyExchangeTokenTransaction = () => {
-    const f = async () => {
-      if (state.contract) {
-        const c = state.contract;
-        await c.methods.buyExchangeToken().send({
-          value: state.web3.utils.toWei(state.transactBuyEE.toString())
-        });
-      }
-    };
-    f();
+  const buyExchangeTokenTransaction = async () => {
+    if (state.contract) {
+      const c = state.contract;
+      await c.methods.buyExchangeToken().send({
+        value: state.web3.utils.toWei(state.transactBuyEE.toString())
+      });
+    }
   };
   return (
     <React.Fragment>
-      <Paper className={classes.container}>
-        <Typography variant="h5" noWrap>
-          Account Details:
-        </Typography>
-        <Typography variant="h6" noWrap>
-          Balance:
-          {state.userBalance
-            ? state.web3.utils.fromWei(state.userBalance)
-            : "-"}
-          EE$
-        </Typography>
-      </Paper>
-      <Paper className={classes.container}>
-        <Typography variant="h6" noWrap>
-          Create Company and List on Exchange
-        </Typography>
-        <Grid container direction="row" alignItems="center" spacing={2}>
-          <Grid item zeroMinWidth>
-            <TextField
-              id="CompanyName"
-              label="Company Name"
-              className={classes.textField}
-              value={state.transactNewCompanyName}
-              onChange={handleNewCompany("name")}
-              margin="normal"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item zeroMinWidth>
-            <TextField
-              id="CompanySymbol"
-              label="Company Symbol"
-              className={classes.textField}
-              value={state.transactNewCompanySymbol}
-              onChange={handleNewCompany("symbol")}
-              margin="normal"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item zeroMinWidth>
-            <TextField
-              id="PricePerShare"
-              label="Price per Share (EE$)"
-              value={state.transactNewCompanyPrice}
-              onChange={handleNewCompany("price")}
-              type="number"
-              step="0.01"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true
-              }}
-              margin="normal"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item zeroMinWidth>
-            <Button
-              color="primary"
-              size="large"
-              variant="contained"
-              className={classes.button}
-              onClick={createNewCompanyAndListTransaction}
-            >
-              send
-            </Button>
-          </Grid>
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="stretch"
+        className={classes.root}
+        spacing={1}
+      >
+        <Grid item>
+          <Paper className={classes.container}>
+            <Typography variant="h6" noWrap>
+              Balance:
+              {state.userBalance
+                ? state.web3.utils.fromWei(state.userBalance)
+                : "-"}
+              EE$
+            </Typography>
+          </Paper>
         </Grid>
-      </Paper>
+        <Grid item>
+          <Paper className={classes.container}>
+            <Typography variant="h6" noWrap>
+              Create Company and List on Exchange
+            </Typography>
+            <Grid container direction="row" alignItems="center" spacing={2}>
+              <Grid item zeroMinWidth>
+                <TextField
+                  id="CompanyName"
+                  label="Company Name"
+                  className={classes.textField}
+                  value={state.transactNewCompanyName}
+                  onChange={handleNewCompany("name")}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item zeroMinWidth>
+                <TextField
+                  id="CompanySymbol"
+                  label="Company Symbol"
+                  className={classes.textField}
+                  value={state.transactNewCompanySymbol}
+                  onChange={handleNewCompany("symbol")}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item zeroMinWidth>
+                <TextField
+                  id="PricePerShare"
+                  label="Price per Share (EE$)"
+                  value={state.transactNewCompanyPrice}
+                  onChange={handleNewCompany("price")}
+                  type="number"
+                  inputProps={{ step: "0.01", min: "0.01" }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item zeroMinWidth>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  className={classes.button}
+                  onClick={createNewCompanyAndListTransaction}
+                >
+                  send
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
 
-      <Paper className={classes.container}>
-        <Typography variant="h6" noWrap>
-          Buy Exchange Tokens (EE$)
-        </Typography>
-        <Grid container direction="row" alignItems="center" spacing={2}>
-          <Grid item zeroMinWidth>
-            <TextField
-              key="AmountofEE"
-              id="AmountofEE"
-              label="AmountOfEE"
-              value={state.transactBuyEE}
-              onChange={handleBuyEE()}
-              type="number"
-              inputProps={{ step: "0.01", min: "0.01" }}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true
-              }}
-              margin="normal"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item zeroMinWidth>
-            <Button
-              color="primary"
-              size="large"
-              variant="contained"
-              className={classes.button}
-              onClick={buyExchangeTokenTransaction}
-            >
-              send
-            </Button>
-          </Grid>
+        <Grid item>
+          <Paper className={classes.container}>
+            <Typography variant="h6" noWrap>
+              Buy Exchange Tokens (EE$)
+            </Typography>
+            <Grid container direction="row" alignItems="center" spacing={2}>
+              <Grid item zeroMinWidth>
+                <TextField
+                  key="AmountofEE"
+                  id="AmountofEE"
+                  label="AmountOfEE"
+                  value={state.transactBuyEE}
+                  onChange={handleBuyEE()}
+                  type="number"
+                  inputProps={{ step: "0.01", min: "0.01" }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item zeroMinWidth>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  className={classes.button}
+                  onClick={buyExchangeTokenTransaction}
+                >
+                  send
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
         </Grid>
-      </Paper>
+      </Grid>
     </React.Fragment>
   );
 };
@@ -249,6 +258,7 @@ export default function User() {
 
   return (
     <React.Fragment>
+      {console.log("test")}
       <Grid
         container
         direction="column"
@@ -257,10 +267,10 @@ export default function User() {
         className={classes.root}
         spacing={1}
       >
+        <Grid item>{state.contract && <UserCapabilities />}</Grid>
         <Grid item>
           {state.contract && state.userIsAdmin && <AdminCapabilities />}
         </Grid>
-        <Grid item>{state.contract && <UserCapabilities />}</Grid>
       </Grid>
     </React.Fragment>
   );

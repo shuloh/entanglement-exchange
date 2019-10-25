@@ -16,10 +16,10 @@ const initialState = {
   userNumberCompanies: 0,
   userOwnedCompanies: {},
 
-  exchangeAddress: false,
+  exchangeAddress: "",
   exchangeIsOpen: false,
   exchangeOwner: "",
-  exchangeToken: null,
+  exchangeToken: "",
   exchangeNumberCompanies: 0,
   exchangeCompanies: {},
 
@@ -48,6 +48,8 @@ function reducer(state, action) {
       return { ...state, userIsAdmin: action.payload };
     case "SET_USER_BALANCE":
       return { ...state, userBalance: action.payload };
+    case "GET_USER_BALANCE":
+      return state.userBalance;
     case "SET_USER_NUMBERCOMPANIES":
       return { ...state, userNumberCompanies: action.payload };
     case "ADD_USER_OWNEDCOMPANY":
@@ -55,7 +57,15 @@ function reducer(state, action) {
         ...state,
         userOwnedCompanies: {
           ...state.exchangeCompanies,
-          [action.payload.companyAddress]: action.payload.value
+          [action.payload]: true
+        }
+      };
+    case "REMOVE_USER_OWNEDCOMPANY":
+      return {
+        ...state,
+        userOwnedCompanies: {
+          ...state.exchangeCompanies,
+          [action.payload]: false
         }
       };
     case "SET_EXCHANGE_ADDRESS":
@@ -68,6 +78,11 @@ function reducer(state, action) {
       return { ...state, exchangeToken: action.payload };
     case "SET_EXCHANGE_NUMBERCOMPANIES":
       return { ...state, exchangeNumberCompanies: action.payload };
+    case "SET_EXCHANGE_COMPANIES":
+      return {
+        ...state,
+        exchangeCompanies: action.payload
+      };
     case "ADD_EXCHANGE_COMPANY":
       return {
         ...state,

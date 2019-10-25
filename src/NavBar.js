@@ -9,6 +9,7 @@ import TemporaryDrawer from "./NavDrawer";
 import PrivateExchangeProxy from "./contracts/PrivateExchangeProxy.json";
 import PrivateExchangeLogic from "./contracts/PrivateExchangeLogic.json";
 import PrivateCompany from "./contracts/PrivateCompany.json";
+import { useSnackbar } from "notistack";
 
 import { Store } from "./Store";
 
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar() {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
+  const { enqueueSnackbar } = useSnackbar();
   const connectWeb3 = async () => {
     try {
       //store web3 for contract interaction in whole app
@@ -40,6 +42,7 @@ export default function NavBar() {
         type: "SET_ACCOUNT",
         payload: accounts[0]
       });
+      enqueueSnackbar("account initialized", { variant: "success" });
 
       //store networkId for contract interaction in whole app
       const networkId = await web3.eth.net.getId();
@@ -60,11 +63,12 @@ export default function NavBar() {
         type: "SET_CONTRACT",
         payload: instance
       });
+      enqueueSnackbar("contract initialized", { variant: "success" });
       await exchangeDetails(web3, instance, accounts[0]);
       await userDetails(instance, accounts[0]);
     } catch (error) {
       // Catch any errors for any of the above operations.
-      console.log(error);
+      enqueueSnackbar("error with web3 connection", { variant: "error" });
     }
   };
   const userDetails = async (c, account) => {
@@ -89,11 +93,9 @@ export default function NavBar() {
     const _owner = await c.methods.owner().call();
     dispatch({ type: "SET_EXCHANGE_OWNER", payload: _owner });
     const _token = await c.methods.exchangeToken().call();
-    console.log(_token);
     const _tokenContract = new web3.eth.Contract(PrivateCompany.abi, _token, {
       from: account
     });
-    console.log(_tokenContract);
     dispatch({
       type: "SET_EXCHANGE_TOKEN",
       payload: _tokenContract
@@ -121,7 +123,6 @@ export default function NavBar() {
       const companySharesForSales = await companyContract.methods
         .allowance(companyOwner, c.options.address)
         .call();
-      console.log(companyName, companySymbol, companyOwner, companyPrice);
       dispatch({
         type: "ADD_EXCHANGE_COMPANY",
         payload: {

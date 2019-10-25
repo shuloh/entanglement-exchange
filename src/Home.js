@@ -1,66 +1,46 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import IPrivateCompany from "./contracts/IPrivateCompany.json";
+import ListedCompanyCard from "./ListedCompanyCard";
 
 import { Store } from "./Store";
-import ListedCompaniesGrid from "./ListedCompaniesGrid";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2, 2, 2)
+    flexGrow: 1,
+    padding: theme.spacing(2, 2)
+  },
+  card: {
+    height: 140,
+    width: 100
   }
 }));
+
 export default function Home() {
   const classes = useStyles();
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
 
-  useEffect(() => {
-    async function fetchCompanies() {
-      if (state.contract) {
-        const nCompanies = await state.contract.methods
-          .numberOfListedCompanies()
-          .call({ from: state.account });
-        for (let i = 0; i < nCompanies; i++) {
-          const cAddress = await state.contract.methods
-            .listedCompanies(i)
-            .call({ from: state.account });
-          if (state.exchangeCompanies[cAddress]) {
-            continue;
-          } else {
-            const companyContract = new state.web3.eth.Contract(
-              IPrivateCompany.abi,
-              cAddress
-            );
-            const companyName = await companyContract.methods
-              .name()
-              .call({ from: state.account });
-            const companySymbol = await companyContract.methods
-              .symbol()
-              .call({ from: state.account });
-            dispatch({
-              type: "ADD_EXCHANGELISTEDCOMPANY",
-              payload: {
-                key: cAddress,
-                value: {
-                  name: companyName,
-                  symbol: companySymbol,
-                  contract: companyContract
-                }
-              }
-            });
-          }
-        }
-      }
-    }
-    fetchCompanies();
-  });
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Typography variant="h6">Listed Companies</Typography>
-        <ListedCompaniesGrid />
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={2}
+        >
+          {Object.keys(state.exchangeCompanies).map(address => (
+            <Grid item key={address}>
+              <ListedCompanyCard
+                key={address}
+                className={classes.card}
+                address={address}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Paper>
     </React.Fragment>
   );

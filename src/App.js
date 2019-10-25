@@ -39,9 +39,15 @@ export default function App() {
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                 <Switch>
-                  <Route path="/About" render={() => <About />} />
-                  <Route path="/User" render={() => <User />} />
-                  <Route path="/" render={() => <Home />} />
+                  <Route path="/About">
+                    <About />
+                  </Route>
+                  <Route path="/User">
+                    <User />
+                  </Route>
+                  <Route path="/">
+                    <Home />
+                  </Route>
                 </Switch>
               </Router>
               <EventManager />
