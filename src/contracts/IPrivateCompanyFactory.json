@@ -52,15 +52,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0xe0b26c55b2b6092a011a4ab94ea6d6e40c316961cc519ee061d095c69133ecba\",\"urls\":[\"bzz-raw://44cb0774887f46d9ae9eaece0229ce4e3de88e1d1024d8b33af98bfa66028f8e\",\"dweb:/ipfs/Qma7uAMzAoFV4ZGDeoTSGYRf4Jzc1jibdD9rwKNjw2hjJH\"]},\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0x93d9fe3c3b944a90e31db0e4320e1a5aa5c1337c4050811647146cda97e5d940\",\"urls\":[\"bzz-raw://1b49b788ce0625e0bcdfd2ce6d766ed34986a4bb21d2fafb39d37a289df5e88c\",\"dweb:/ipfs/QmdgwfEsFNB78L6Binyrsu7oPQCu2VMARGU2Mj7FrnuApR\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0xe0b26c55b2b6092a011a4ab94ea6d6e40c316961cc519ee061d095c69133ecba\",\"urls\":[\"bzz-raw://44cb0774887f46d9ae9eaece0229ce4e3de88e1d1024d8b33af98bfa66028f8e\",\"dweb:/ipfs/Qma7uAMzAoFV4ZGDeoTSGYRf4Jzc1jibdD9rwKNjw2hjJH\"]},\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0x93d9fe3c3b944a90e31db0e4320e1a5aa5c1337c4050811647146cda97e5d940\",\"urls\":[\"bzz-raw://1b49b788ce0625e0bcdfd2ce6d766ed34986a4bb21d2fafb39d37a289df5e88c\",\"dweb:/ipfs/QmdgwfEsFNB78L6Binyrsu7oPQCu2VMARGU2Mj7FrnuApR\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity 0.5.12;\nimport \"./IPrivateCompany.sol\";\n\ninterface IPrivateCompanyFactory {\n    event newCompanyCreated(address indexed owner, address indexed company);\n    function newCompany(address intendedOwner, string calldata name, string calldata symbol) external returns (address);\n}",
-  "sourcePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+  "sourcePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
   "ast": {
-    "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
         129
@@ -80,7 +80,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
         "id": 111,
         "nodeType": "ImportDirective",
@@ -317,7 +317,7 @@
     "src": "0:291:1"
   },
   "legacyAST": {
-    "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
         129
@@ -337,7 +337,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
         "id": 111,
         "nodeType": "ImportDirective",
@@ -579,7 +579,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-24T14:36:24.877Z",
+  "updatedAt": "2019-10-25T07:52:23.074Z",
   "devdoc": {
     "methods": {}
   },

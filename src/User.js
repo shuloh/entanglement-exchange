@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Store } from "./Store";
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
     padding: theme.spacing(1, 0, 0, 0)
   },
   container: {
@@ -73,13 +72,12 @@ const UserCapabilities = () => {
         direction="column"
         justify="flex-start"
         alignItems="stretch"
-        className={classes.root}
         spacing={1}
       >
         <Grid item>
           <Paper className={classes.container}>
             <Typography variant="h6" noWrap>
-              Balance:
+              Balance:{" "}
               {state.userBalance
                 ? state.web3.utils.fromWei(state.userBalance)
                 : "-"}
@@ -87,7 +85,7 @@ const UserCapabilities = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item>
+        <Grid item zeroMinWidth>
           <Paper className={classes.container}>
             <Typography variant="h6" noWrap>
               Create Company and List on Exchange
@@ -104,7 +102,7 @@ const UserCapabilities = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item zeroMinWidth>
+              <Grid item>
                 <TextField
                   id="CompanySymbol"
                   label="Company Symbol"
@@ -115,10 +113,10 @@ const UserCapabilities = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item zeroMinWidth>
+              <Grid item>
                 <TextField
                   id="PricePerShare"
-                  label="Price per 1.0 unit share (EE$)"
+                  label="Price per 1 unit share (EE$)"
                   value={state.transactNewCompanyPrice}
                   onChange={handleNewCompany("price")}
                   type="number"
@@ -131,7 +129,7 @@ const UserCapabilities = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item zeroMinWidth>
+              <Grid item>
                 <Button
                   color="primary"
                   size="large"
@@ -188,6 +186,29 @@ const UserCapabilities = () => {
   );
 };
 const AdminCapabilities = () => {
+  const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+      padding: theme.spacing(1, 0, 0, 0)
+    },
+    container: {
+      padding: theme.spacing(2, 3, 2, 3)
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200
+    },
+    dense: {
+      marginTop: 19
+    },
+    menu: {
+      width: 200
+    },
+    button: {
+      margin: theme.spacing(1)
+    }
+  }));
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const switchOpenMode = event => {

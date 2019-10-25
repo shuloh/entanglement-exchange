@@ -23,8 +23,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   label: {
-    noWrap: "true",
-    color: "#FE6B8B"
+    noWrap: "true"
   }
 }));
 
@@ -165,7 +164,7 @@ export default function NavBar() {
                 aria-label="Connect"
               />
             }
-            label={state.account ? state.account : "Connect Web3"}
+            label={state.account ? state.account : "Connect web3"}
           />
         </Toolbar>
       </AppBar>
