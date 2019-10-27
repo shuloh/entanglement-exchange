@@ -17,28 +17,28 @@ export default function ListedCompanyDial(props) {
   const [mintShares, setMintShares] = React.useState(0);
   const { enqueueSnackbar } = useSnackbar();
   const handleBuyShares = () => async event => {
-    setBuyShares(event.target.value);
+    setBuyShares(event.target.value.toString());
     setBuySharesCost(
-      event.target.value * state.web3.utils.fromWei(props.company.pricePerShare)
+      (
+        event.target.value *
+        state.web3.utils.fromWei(props.company.pricePerShare)
+      ).toString()
     );
   };
   const handleListShares = () => async event => {
-    setListShares(event.target.value);
+    setListShares(event.target.value.toString());
   };
   const handleDelistShares = () => async event => {
-    setDelistShares(event.target.value);
+    setDelistShares(event.target.value.toString());
   };
   const handleMintShares = () => async event => {
-    setMintShares(event.target.value);
+    setMintShares(event.target.value.toString());
   };
   const buySharesTransaction = async () => {
     if (state.contract) {
       const c = state.contract;
       await c.methods
-        .buyCompanyShares(
-          props.address,
-          state.web3.utils.toWei(Number(buyShares).toFixed(18))
-        )
+        .buyCompanyShares(props.address, state.web3.utils.toWei(buyShares))
         .send();
       const remainingShares = await props.company.contract.methods
         .allowance(props.company.owner, state.exchangeAddress)
@@ -61,6 +61,8 @@ export default function ListedCompanyDial(props) {
         type: "SET_USER_STAKED",
         payload: newTokenStaked
       });
+      setBuyShares("0");
+      setBuySharesCost("0");
       enqueueSnackbar("Buy shares transaction successful", {
         variant: "success"
       });
@@ -69,9 +71,7 @@ export default function ListedCompanyDial(props) {
   const mintSharesTransaction = async () => {
     if (props.company.contract) {
       const c = props.company.contract;
-      const result = await c.methods
-        .mint(state.web3.utils.toWei(Number(mintShares).toFixed(18)))
-        .send();
+      await c.methods.mint(state.web3.utils.toWei(mintShares)).send();
       const newSupply = await c.methods.totalSupply().call();
       dispatch({
         type: "UPDATE_EXCHANGE_COMPANY",
@@ -81,6 +81,7 @@ export default function ListedCompanyDial(props) {
           value: newSupply
         }
       });
+      setMintShares("0");
       enqueueSnackbar("Mint shares transaction successful", {
         variant: "success"
       });
@@ -92,7 +93,7 @@ export default function ListedCompanyDial(props) {
       const result = await c.methods
         .increaseAllowance(
           state.exchangeAddress,
-          state.web3.utils.toWei(Number(listShares).toFixed(18))
+          state.web3.utils.toWei(listShares)
         )
         .send();
       const newSharesListed = result.events.Approval.returnValues.value;
@@ -104,6 +105,7 @@ export default function ListedCompanyDial(props) {
           value: newSharesListed
         }
       });
+      setListShares("0");
       enqueueSnackbar("List shares transaction successful", {
         variant: "success"
       });
@@ -115,7 +117,7 @@ export default function ListedCompanyDial(props) {
       const result = await c.methods
         .decreaseAllowance(
           state.exchangeAddress,
-          state.web3.utils.toWei(Number(delistShares).toFixed(18))
+          state.web3.utils.toWei(delistShares)
         )
         .send();
       const newSharesListed = result.events.Approval.returnValues.value;
@@ -127,6 +129,7 @@ export default function ListedCompanyDial(props) {
           value: newSharesListed
         }
       });
+      setDelistShares("0");
       enqueueSnackbar("Delist shares transaction successful", {
         variant: "success"
       });

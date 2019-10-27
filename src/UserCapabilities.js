@@ -32,26 +32,36 @@ const useStyles = makeStyles(theme => ({
 export default function UserCapabilities() {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
-  const [increaseStakeTokens, setIncreaseStakeTokens] = useState(0.01);
-  const [decreaseStakeTokens, setDecreaseStakeTokens] = useState(0.01);
-  const [buyTokens, setBuyTokens] = useState(0.01);
+  const [increaseStakeTokens, setIncreaseStakeTokens] = useState("0");
+  const [decreaseStakeTokens, setDecreaseStakeTokens] = useState("0");
+  const [buyTokens, setBuyTokens] = useState("0");
+  const [sellTokens, setSellTokens] = useState("0");
   const [newCompany, setNewCompany] = useState({
     name: "",
     symbol: "",
     price: 0
   });
+
   const handleNewCompany = name => event => {
-    setNewCompany({ ...newCompany, [name]: event.target.value });
+    setNewCompany({ ...newCompany, [name]: event.target.value.toString() });
   };
+
   const handleBuyTokens = () => async event => {
-    setBuyTokens(event.target.value);
+    setBuyTokens(event.target.value.toString());
   };
+
+  const handleSellTokens = () => async event => {
+    setSellTokens(event.target.value.toString());
+  };
+
   const handleIncreaseStakeTokens = () => async event => {
-    setIncreaseStakeTokens(event.target.value);
+    setIncreaseStakeTokens(event.target.value.toString());
   };
+
   const handleDecreaseStakeTokens = () => async event => {
-    setDecreaseStakeTokens(event.target.value);
+    setDecreaseStakeTokens(event.target.value.toString());
   };
+
   const createNewCompanyAndListTransaction = async () => {
     if (state.contract) {
       const c = state.contract;
@@ -59,31 +69,42 @@ export default function UserCapabilities() {
         .createCompanyAndList(
           newCompany.name,
           newCompany.symbol,
-          state.web3.utils.toWei(Number(newCompany.price).toFixed(18))
+          state.web3.utils.toWei(newCompany.price)
         )
         .send();
     }
   };
+
   const buyExchangeTokenTransaction = async () => {
     if (state.contract) {
       const c = state.contract;
       await c.methods.buyExchangeToken().send({
-        value: state.web3.utils.toWei(Number(buyTokens).toFixed(18))
+        value: state.web3.utils.toWei(buyTokens)
       });
-      setBuyTokens(0.01);
+      setBuyTokens(0);
     }
   };
+
+  const sellExchangeTokenTransaction = async () => {
+    if (state.contract) {
+      const c = state.contract;
+      const amount = state.web3.utils.toWei(sellTokens);
+      await c.methods.sellExchangeToken(amount).send();
+      setSellTokens(0);
+    }
+  };
+
   const decreaseStakeExchangeTokenTransaction = async () => {
     if (state.exchangeToken) {
       const c = state.exchangeToken;
       const result = await c.methods
         .decreaseAllowance(
           state.exchangeAddress,
-          state.web3.utils.toWei(Number(decreaseStakeTokens).toFixed(18))
+          state.web3.utils.toWei(decreaseStakeTokens)
         )
         .send();
       const newStake = result.events.Approval.returnValues.value;
-      setDecreaseStakeTokens(0.01);
+      setDecreaseStakeTokens(0);
       dispatch({ type: "SET_USER_STAKED", payload: newStake });
     }
   };
@@ -93,11 +114,11 @@ export default function UserCapabilities() {
       const result = await c.methods
         .increaseAllowance(
           state.exchangeAddress,
-          state.web3.utils.toWei(Number(increaseStakeTokens).toFixed(18))
+          state.web3.utils.toWei(increaseStakeTokens)
         )
         .send();
       const newStake = result.events.Approval.returnValues.value;
-      setIncreaseStakeTokens(0.01);
+      setIncreaseStakeTokens(0);
       dispatch({ type: "SET_USER_STAKED", payload: newStake });
     }
   };
@@ -114,7 +135,7 @@ export default function UserCapabilities() {
                 <TextField
                   key="IncreaseStake"
                   id="DecreaseStake"
-                  label="Amount Of EE$"
+                  label="Increase Allowance (EE$)"
                   value={increaseStakeTokens}
                   onChange={handleIncreaseStakeTokens()}
                   type="number"
@@ -142,7 +163,7 @@ export default function UserCapabilities() {
                 <TextField
                   key="DecreaseStake"
                   id="DecreaseStake"
-                  label="Amount Of EE$"
+                  label="Decrease Allowance (EE$)"
                   value={decreaseStakeTokens}
                   onChange={handleDecreaseStakeTokens()}
                   type="number"
@@ -170,14 +191,14 @@ export default function UserCapabilities() {
           </Grid>
           <Grid item>
             <Typography variant="h6" noWrap>
-              Buy Exchange Tokens (EE$)
+              Buy / Sell Exchange Tokens EE$ for Ethereum
             </Typography>
             <Grid container direction="row" alignItems="center">
               <Grid item>
                 <TextField
-                  key="AmountofEE"
-                  id="AmountofEE"
-                  label="Amount Of EE$"
+                  key="buyToke"
+                  id="buyToken"
+                  label="Amount Of EE$ to buy"
                   value={buyTokens}
                   onChange={handleBuyTokens()}
                   type="number"
@@ -199,6 +220,34 @@ export default function UserCapabilities() {
                   onClick={buyExchangeTokenTransaction}
                 >
                   buy
+                </Button>
+              </Grid>
+              <Grid item>
+                <TextField
+                  key="sellToken"
+                  id="sellToken"
+                  label="Amount Of EE$ to sell"
+                  value={sellTokens}
+                  onChange={handleSellTokens()}
+                  type="number"
+                  inputProps={{ step: "0.01", min: "0.000000000000000001" }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  className={classes.button}
+                  onClick={sellExchangeTokenTransaction}
+                >
+                  sell
                 </Button>
               </Grid>
             </Grid>

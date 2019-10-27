@@ -118,17 +118,17 @@
     "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/PrivateExchangeProxy.sol",
     "exportedSymbols": {
       "IPrivateExchangeProxy": [
-        1012
+        1064
       ],
       "PrivateExchangeProxy": [
-        1017
+        1069
       ]
     },
-    "id": 1018,
+    "id": 1070,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 974,
+        "id": 1026,
         "literals": [
           "solidity",
           "0.5",
@@ -140,10 +140,10 @@
       {
         "absolutePath": "@openzeppelin/upgrades/contracts/upgradeability/InitializableAdminUpgradeabilityProxy.sol",
         "file": "@openzeppelin/upgrades/contracts/upgradeability/InitializableAdminUpgradeabilityProxy.sol",
-        "id": 975,
+        "id": 1027,
         "nodeType": "ImportDirective",
-        "scope": 1018,
-        "sourceUnit": 2116,
+        "scope": 1070,
+        "sourceUnit": 2168,
         "src": "24:99:6",
         "symbolAliases": [],
         "unitAlias": ""
@@ -154,9 +154,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1012,
+        "id": 1064,
         "linearizedBaseContracts": [
-          1012
+          1064
         ],
         "name": "IPrivateExchangeProxy",
         "nodeType": "ContractDefinition",
@@ -164,22 +164,22 @@
           {
             "body": null,
             "documentation": "Contract initializer.\n@param _logic address of the initial implementation.\n@param _admin Address of the proxy administrator.\n@param _data Data to send as msg.data to the implementation to initialize the proxied contract.\nIt should include the signature and the parameters of the function to be called, as described in\nhttps://solidity.readthedocs.io/en/v0.5.12/abi-spec.html#function-selector-and-argument-encoding.\nThis parameter is optional, if no data is given the initialization call to proxied contract will be skipped.",
-            "id": 984,
+            "id": 1036,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 982,
+              "id": 1034,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 977,
+                  "id": 1029,
                   "name": "_logic",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "765:14:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -188,7 +188,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 976,
+                    "id": 1028,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "765:7:6",
@@ -203,10 +203,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 979,
+                  "id": 1031,
                   "name": "_admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "781:14:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -215,7 +215,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 978,
+                    "id": 1030,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "781:7:6",
@@ -230,10 +230,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 981,
+                  "id": 1033,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "797:20:6",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -242,7 +242,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 980,
+                    "id": 1032,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "797:5:6",
@@ -258,12 +258,12 @@
               "src": "764:54:6"
             },
             "returnParameters": {
-              "id": 983,
+              "id": 1035,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "835:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "745:91:6",
             "stateMutability": "payable",
             "superFunction": null,
@@ -272,28 +272,28 @@
           {
             "body": null,
             "documentation": "@return The address of the proxy admin.",
-            "id": 989,
+            "id": 1041,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "admin",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 985,
+              "id": 1037,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "917:2:6"
             },
             "returnParameters": {
-              "id": 988,
+              "id": 1040,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 987,
+                  "id": 1039,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 989,
+                  "scope": 1041,
                   "src": "938:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -302,7 +302,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 986,
+                    "id": 1038,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "938:7:6",
@@ -318,7 +318,7 @@
               ],
               "src": "937:9:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "903:44:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -327,28 +327,28 @@
           {
             "body": null,
             "documentation": "@return The address of the implementation.",
-            "id": 994,
+            "id": 1046,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 990,
+              "id": 1042,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1040:2:6"
             },
             "returnParameters": {
-              "id": 993,
+              "id": 1045,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 992,
+                  "id": 1044,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 994,
+                  "scope": 1046,
                   "src": "1061:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -357,7 +357,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 991,
+                    "id": 1043,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1061:7:6",
@@ -373,7 +373,7 @@
               ],
               "src": "1060:9:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1017:53:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -382,22 +382,22 @@
           {
             "body": null,
             "documentation": "@dev Changes the admin of the proxy.\nOnly the current admin can call this function.\n@param newAdmin Address to transfer proxy administration to.",
-            "id": 999,
+            "id": 1051,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "changeAdmin",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 997,
+              "id": 1049,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 996,
+                  "id": 1048,
                   "name": "newAdmin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 999,
+                  "scope": 1051,
                   "src": "1275:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -406,7 +406,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 995,
+                    "id": 1047,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1275:7:6",
@@ -423,12 +423,12 @@
               "src": "1274:18:6"
             },
             "returnParameters": {
-              "id": 998,
+              "id": 1050,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1301:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1254:48:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -437,22 +437,22 @@
           {
             "body": null,
             "documentation": "@dev Upgrade the backing implementation of the proxy.\nOnly the admin can call this function.\n@param newImplementation Address of the new implementation.",
-            "id": 1004,
+            "id": 1056,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "upgradeTo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1002,
+              "id": 1054,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1001,
+                  "id": 1053,
                   "name": "newImplementation",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1004,
+                  "scope": 1056,
                   "src": "1513:25:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -461,7 +461,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1000,
+                    "id": 1052,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1513:7:6",
@@ -478,12 +478,12 @@
               "src": "1512:27:6"
             },
             "returnParameters": {
-              "id": 1003,
+              "id": 1055,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1548:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1494:55:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -492,22 +492,22 @@
           {
             "body": null,
             "documentation": "@dev Upgrade the backing implementation of the proxy and call a function\non the new implementation.\nThis is useful to initialize the proxied contract.\n@param newImplementation Address of the new implementation.\n@param data Data to send as msg.data in the low level call.\nIt should include the signature and the parameters of the function to be called, as described in\nhttps://solidity.readthedocs.io/en/v0.5.12/abi-spec.html#function-selector-and-argument-encoding.",
-            "id": 1011,
+            "id": 1063,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "upgradeToAndCall",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1009,
+              "id": 1061,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1006,
+                  "id": 1058,
                   "name": "newImplementation",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1011,
+                  "scope": 1063,
                   "src": "2104:25:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -516,7 +516,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1005,
+                    "id": 1057,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2104:7:6",
@@ -531,10 +531,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1008,
+                  "id": 1060,
                   "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1011,
+                  "scope": 1063,
                   "src": "2131:19:6",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -543,7 +543,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1007,
+                    "id": 1059,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "2131:5:6",
@@ -559,19 +559,19 @@
               "src": "2103:48:6"
             },
             "returnParameters": {
-              "id": 1010,
+              "id": 1062,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2168:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "2078:91:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1018,
+        "scope": 1070,
         "src": "125:2046:6"
       },
       {
@@ -580,17 +580,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1013,
+              "id": 1065,
               "name": "IPrivateExchangeProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1012,
+              "referencedDeclaration": 1064,
               "src": "2206:21:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPrivateExchangeProxy_$1012",
+                "typeIdentifier": "t_contract$_IPrivateExchangeProxy_$1064",
                 "typeString": "contract IPrivateExchangeProxy"
               }
             },
-            "id": 1014,
+            "id": 1066,
             "nodeType": "InheritanceSpecifier",
             "src": "2206:21:6"
           },
@@ -598,46 +598,46 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1015,
+              "id": 1067,
               "name": "InitializableAdminUpgradeabilityProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2115,
+              "referencedDeclaration": 2167,
               "src": "2229:37:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_InitializableAdminUpgradeabilityProxy_$2115",
+                "typeIdentifier": "t_contract$_InitializableAdminUpgradeabilityProxy_$2167",
                 "typeString": "contract InitializableAdminUpgradeabilityProxy"
               }
             },
-            "id": 1016,
+            "id": 1068,
             "nodeType": "InheritanceSpecifier",
             "src": "2229:37:6"
           }
         ],
         "contractDependencies": [
-          1012,
-          2004,
-          2062,
-          2115,
-          2173,
-          2211
+          1064,
+          2056,
+          2114,
+          2167,
+          2225,
+          2263
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1017,
+        "id": 1069,
         "linearizedBaseContracts": [
-          1017,
-          2115,
-          2173,
-          2004,
-          2062,
-          2211,
-          1012
+          1069,
+          2167,
+          2225,
+          2056,
+          2114,
+          2263,
+          1064
         ],
         "name": "PrivateExchangeProxy",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1018,
+        "scope": 1070,
         "src": "2173:98:6"
       }
     ],
@@ -647,17 +647,17 @@
     "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/PrivateExchangeProxy.sol",
     "exportedSymbols": {
       "IPrivateExchangeProxy": [
-        1012
+        1064
       ],
       "PrivateExchangeProxy": [
-        1017
+        1069
       ]
     },
-    "id": 1018,
+    "id": 1070,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 974,
+        "id": 1026,
         "literals": [
           "solidity",
           "0.5",
@@ -669,10 +669,10 @@
       {
         "absolutePath": "@openzeppelin/upgrades/contracts/upgradeability/InitializableAdminUpgradeabilityProxy.sol",
         "file": "@openzeppelin/upgrades/contracts/upgradeability/InitializableAdminUpgradeabilityProxy.sol",
-        "id": 975,
+        "id": 1027,
         "nodeType": "ImportDirective",
-        "scope": 1018,
-        "sourceUnit": 2116,
+        "scope": 1070,
+        "sourceUnit": 2168,
         "src": "24:99:6",
         "symbolAliases": [],
         "unitAlias": ""
@@ -683,9 +683,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1012,
+        "id": 1064,
         "linearizedBaseContracts": [
-          1012
+          1064
         ],
         "name": "IPrivateExchangeProxy",
         "nodeType": "ContractDefinition",
@@ -693,22 +693,22 @@
           {
             "body": null,
             "documentation": "Contract initializer.\n@param _logic address of the initial implementation.\n@param _admin Address of the proxy administrator.\n@param _data Data to send as msg.data to the implementation to initialize the proxied contract.\nIt should include the signature and the parameters of the function to be called, as described in\nhttps://solidity.readthedocs.io/en/v0.5.12/abi-spec.html#function-selector-and-argument-encoding.\nThis parameter is optional, if no data is given the initialization call to proxied contract will be skipped.",
-            "id": 984,
+            "id": 1036,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 982,
+              "id": 1034,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 977,
+                  "id": 1029,
                   "name": "_logic",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "765:14:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -717,7 +717,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 976,
+                    "id": 1028,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "765:7:6",
@@ -732,10 +732,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 979,
+                  "id": 1031,
                   "name": "_admin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "781:14:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -744,7 +744,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 978,
+                    "id": 1030,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "781:7:6",
@@ -759,10 +759,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 981,
+                  "id": 1033,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 984,
+                  "scope": 1036,
                   "src": "797:20:6",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -771,7 +771,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 980,
+                    "id": 1032,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "797:5:6",
@@ -787,12 +787,12 @@
               "src": "764:54:6"
             },
             "returnParameters": {
-              "id": 983,
+              "id": 1035,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "835:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "745:91:6",
             "stateMutability": "payable",
             "superFunction": null,
@@ -801,28 +801,28 @@
           {
             "body": null,
             "documentation": "@return The address of the proxy admin.",
-            "id": 989,
+            "id": 1041,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "admin",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 985,
+              "id": 1037,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "917:2:6"
             },
             "returnParameters": {
-              "id": 988,
+              "id": 1040,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 987,
+                  "id": 1039,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 989,
+                  "scope": 1041,
                   "src": "938:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -831,7 +831,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 986,
+                    "id": 1038,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "938:7:6",
@@ -847,7 +847,7 @@
               ],
               "src": "937:9:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "903:44:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -856,28 +856,28 @@
           {
             "body": null,
             "documentation": "@return The address of the implementation.",
-            "id": 994,
+            "id": 1046,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 990,
+              "id": 1042,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1040:2:6"
             },
             "returnParameters": {
-              "id": 993,
+              "id": 1045,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 992,
+                  "id": 1044,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 994,
+                  "scope": 1046,
                   "src": "1061:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -886,7 +886,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 991,
+                    "id": 1043,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1061:7:6",
@@ -902,7 +902,7 @@
               ],
               "src": "1060:9:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1017:53:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -911,22 +911,22 @@
           {
             "body": null,
             "documentation": "@dev Changes the admin of the proxy.\nOnly the current admin can call this function.\n@param newAdmin Address to transfer proxy administration to.",
-            "id": 999,
+            "id": 1051,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "changeAdmin",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 997,
+              "id": 1049,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 996,
+                  "id": 1048,
                   "name": "newAdmin",
                   "nodeType": "VariableDeclaration",
-                  "scope": 999,
+                  "scope": 1051,
                   "src": "1275:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -935,7 +935,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 995,
+                    "id": 1047,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1275:7:6",
@@ -952,12 +952,12 @@
               "src": "1274:18:6"
             },
             "returnParameters": {
-              "id": 998,
+              "id": 1050,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1301:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1254:48:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -966,22 +966,22 @@
           {
             "body": null,
             "documentation": "@dev Upgrade the backing implementation of the proxy.\nOnly the admin can call this function.\n@param newImplementation Address of the new implementation.",
-            "id": 1004,
+            "id": 1056,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "upgradeTo",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1002,
+              "id": 1054,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1001,
+                  "id": 1053,
                   "name": "newImplementation",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1004,
+                  "scope": 1056,
                   "src": "1513:25:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -990,7 +990,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1000,
+                    "id": 1052,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1513:7:6",
@@ -1007,12 +1007,12 @@
               "src": "1512:27:6"
             },
             "returnParameters": {
-              "id": 1003,
+              "id": 1055,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1548:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "1494:55:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1021,22 +1021,22 @@
           {
             "body": null,
             "documentation": "@dev Upgrade the backing implementation of the proxy and call a function\non the new implementation.\nThis is useful to initialize the proxied contract.\n@param newImplementation Address of the new implementation.\n@param data Data to send as msg.data in the low level call.\nIt should include the signature and the parameters of the function to be called, as described in\nhttps://solidity.readthedocs.io/en/v0.5.12/abi-spec.html#function-selector-and-argument-encoding.",
-            "id": 1011,
+            "id": 1063,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "upgradeToAndCall",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1009,
+              "id": 1061,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1006,
+                  "id": 1058,
                   "name": "newImplementation",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1011,
+                  "scope": 1063,
                   "src": "2104:25:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1045,7 +1045,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1005,
+                    "id": 1057,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2104:7:6",
@@ -1060,10 +1060,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1008,
+                  "id": 1060,
                   "name": "data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1011,
+                  "scope": 1063,
                   "src": "2131:19:6",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -1072,7 +1072,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1007,
+                    "id": 1059,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "2131:5:6",
@@ -1088,19 +1088,19 @@
               "src": "2103:48:6"
             },
             "returnParameters": {
-              "id": 1010,
+              "id": 1062,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2168:0:6"
             },
-            "scope": 1012,
+            "scope": 1064,
             "src": "2078:91:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1018,
+        "scope": 1070,
         "src": "125:2046:6"
       },
       {
@@ -1109,17 +1109,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1013,
+              "id": 1065,
               "name": "IPrivateExchangeProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1012,
+              "referencedDeclaration": 1064,
               "src": "2206:21:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPrivateExchangeProxy_$1012",
+                "typeIdentifier": "t_contract$_IPrivateExchangeProxy_$1064",
                 "typeString": "contract IPrivateExchangeProxy"
               }
             },
-            "id": 1014,
+            "id": 1066,
             "nodeType": "InheritanceSpecifier",
             "src": "2206:21:6"
           },
@@ -1127,46 +1127,46 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1015,
+              "id": 1067,
               "name": "InitializableAdminUpgradeabilityProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2115,
+              "referencedDeclaration": 2167,
               "src": "2229:37:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_InitializableAdminUpgradeabilityProxy_$2115",
+                "typeIdentifier": "t_contract$_InitializableAdminUpgradeabilityProxy_$2167",
                 "typeString": "contract InitializableAdminUpgradeabilityProxy"
               }
             },
-            "id": 1016,
+            "id": 1068,
             "nodeType": "InheritanceSpecifier",
             "src": "2229:37:6"
           }
         ],
         "contractDependencies": [
-          1012,
-          2004,
-          2062,
-          2115,
-          2173,
-          2211
+          1064,
+          2056,
+          2114,
+          2167,
+          2225,
+          2263
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1017,
+        "id": 1069,
         "linearizedBaseContracts": [
-          1017,
-          2115,
-          2173,
-          2004,
-          2062,
-          2211,
-          1012
+          1069,
+          2167,
+          2225,
+          2056,
+          2114,
+          2263,
+          1064
         ],
         "name": "PrivateExchangeProxy",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1018,
+        "scope": 1070,
         "src": "2173:98:6"
       }
     ],
@@ -1178,7 +1178,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-27T10:13:38.378Z",
+  "updatedAt": "2019-10-27T15:29:57.779Z",
   "devdoc": {
     "methods": {
       "admin()": {

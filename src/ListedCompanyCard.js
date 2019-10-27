@@ -38,17 +38,17 @@ export default function ListedCompanyCard(props) {
           {<br />}
           Price/Share:{" "}
           {state.web3.utils.fromWei(
-            state.exchangeCompanies[props.address].pricePerShare
+            state.exchangeCompanies[props.address].pricePerShare.toString()
           )}
           {<br />}
           Shares for Sale:{" "}
           {state.web3.utils.fromWei(
-            state.exchangeCompanies[props.address].sharesForSale
+            state.exchangeCompanies[props.address].sharesForSale.toString()
           )}
           {<br />}
           Total Supply:{" "}
           {state.web3.utils.fromWei(
-            state.exchangeCompanies[props.address].totalSupply
+            state.exchangeCompanies[props.address].totalSupply.toString()
           )}
         </Typography>
         <Fab
