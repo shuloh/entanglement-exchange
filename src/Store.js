@@ -13,6 +13,7 @@ const initialState = {
 
   userIsAdmin: false,
   userBalance: "0",
+  userStaked: "0",
   userNumberCompanies: 0,
   userOwnedCompanies: {},
 
@@ -21,13 +22,7 @@ const initialState = {
   exchangeOwner: "",
   exchangeToken: "",
   exchangeNumberCompanies: 0,
-  exchangeCompanies: {},
-
-  transactAdminOpenMode: true,
-  transactNewCompanyName: "",
-  transactNewCompanySymbol: "",
-  transactNewCompanyPrice: 1,
-  transactBuyEE: 0.01
+  exchangeCompanies: {}
 };
 
 function reducer(state, action) {
@@ -48,6 +43,8 @@ function reducer(state, action) {
       return { ...state, userIsAdmin: action.payload };
     case "SET_USER_BALANCE":
       return { ...state, userBalance: action.payload };
+    case "SET_USER_STAKED":
+      return { ...state, userStaked: action.payload };
     case "GET_USER_BALANCE":
       return state.userBalance;
     case "SET_USER_NUMBERCOMPANIES":
@@ -89,6 +86,18 @@ function reducer(state, action) {
         exchangeCompanies: {
           ...state.exchangeCompanies,
           [action.payload.address]: action.payload.descr
+        }
+      };
+    case "UPDATE_EXCHANGE_COMPANY":
+      const companyAddress = action.payload.address;
+      return {
+        ...state,
+        exchangeCompanies: {
+          ...state.exchangeCompanies,
+          [companyAddress]: {
+            ...state.exchangeCompanies[companyAddress],
+            [action.payload.key]: action.payload.value
+          }
         }
       };
 

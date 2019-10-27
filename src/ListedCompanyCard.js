@@ -1,28 +1,22 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
+import Fab from "@material-ui/core/Fab";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import IconButton from "@material-ui/core/IconButton";
 import { Store } from "./Store";
+import EditIcon from "@material-ui/icons/Edit";
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 275,
-    background: theme.palette.secondary.dark
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
-  },
-  title: {
-    fontSize: 14
+    backgroundColor: theme.palette.secondary.dark
   },
   pos: {
     marginBottom: 12
+  },
+  fab: {
+    float: "right",
+    margin: theme.spacing(1)
   }
 }));
 
@@ -31,14 +25,7 @@ export default function ListedCompanyCard(props) {
   const { state } = useContext(Store);
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-      />
+    <Card className={classes.card} raised>
       <CardContent>
         <Typography variant="h5">
           {state.exchangeCompanies[props.address].symbol}
@@ -55,12 +42,25 @@ export default function ListedCompanyCard(props) {
           )}
           {<br />}
           Shares for Sale:{" "}
-          {state.exchangeCompanies[props.address].sharesForSale}
+          {state.web3.utils.fromWei(
+            state.exchangeCompanies[props.address].sharesForSale
+          )}
+          {<br />}
+          Total Supply:{" "}
+          {state.web3.utils.fromWei(
+            state.exchangeCompanies[props.address].totalSupply
+          )}
         </Typography>
+        <Fab
+          color="default"
+          size="small"
+          aria-label="edit"
+          className={classes.fab}
+          onClick={props.edit(props.address)}
+        >
+          <EditIcon />
+        </Fab>
       </CardContent>
-      <CardActions>
-        {/* <Button size="small">Learn More</Button> */}
-      </CardActions>
     </Card>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
@@ -10,6 +12,7 @@ import TemporaryDrawer from "./NavDrawer";
 import PrivateExchangeProxy from "./contracts/PrivateExchangeProxy.json";
 import PrivateExchangeLogic from "./contracts/PrivateExchangeLogic.json";
 import PrivateCompany from "./contracts/PrivateCompany.json";
+import { Link } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
 import { Store } from "./Store";
@@ -23,7 +26,10 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   label: {
-    noWrap: "true"
+    noWrap: true
+  },
+  balanceBar: {
+    padding: theme.spacing(1, 5, 1, 5)
   }
 }));
 
@@ -31,53 +37,69 @@ export default function NavBar() {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { enqueueSnackbar } = useSnackbar();
-  const connectWeb3 = async () => {
+  const storeWeb3Contract = async web3 => {
     try {
-      //store web3 for contract interaction in whole app
-      const web3 = await getWeb3();
-      dispatch({
-        type: "SET_WEB3",
-        payload: web3
-      });
-
-      //store account for contract interaction in whole app
       const accounts = await web3.eth.getAccounts();
+      const account = accounts[0];
       dispatch({
         type: "SET_ACCOUNT",
-        payload: accounts[0]
+        payload: account
       });
-      enqueueSnackbar("account initialized", { variant: "success" });
-
-      //store networkId for contract interaction in whole app
+      enqueueSnackbar("Account initialized", { variant: "success" });
       const networkId = await web3.eth.net.getId();
       dispatch({
         type: "SET_NETWORK",
         payload: networkId
       });
-      //store contract
       const deployedProxy = PrivateExchangeProxy.networks[networkId];
       const instance = new web3.eth.Contract(
         PrivateExchangeLogic.abi,
         deployedProxy.address,
         {
-          from: accounts[0]
+          from: account
         }
       );
       dispatch({
         type: "SET_CONTRACT",
         payload: instance
       });
-      enqueueSnackbar("contract initialized", { variant: "success" });
-      await exchangeDetails(web3, instance, accounts[0]);
-      await userDetails(instance, accounts[0]);
+      enqueueSnackbar("Contract initialized", { variant: "success" });
+      await exchangeDetails(web3, instance, account);
+      await userDetails(instance, account);
     } catch (error) {
-      // Catch any errors for any of the above operations.
-      enqueueSnackbar("error with web3 connection", { variant: "error" });
+      console.log(error);
+      enqueueSnackbar("Error with contract initialization", {
+        variant: "error"
+      });
+    }
+  };
+  const connectWeb3 = async () => {
+    try {
+      //store web3 for contract interaction in whole app
+      const web3 = await getWeb3();
+      if (window.ethereum) {
+        window.ethereum.on("accountsChanged", accounts => {
+          storeWeb3Contract(web3);
+        });
+        window.ethereum.on("networkChanged", accounts => {
+          storeWeb3Contract(web3);
+        });
+      }
+      dispatch({
+        type: "SET_WEB3",
+        payload: web3
+      });
+      storeWeb3Contract(web3);
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar("Error with web3 connection", { variant: "error" });
     }
   };
   const userDetails = async (c, account) => {
     const _isAdmin = await c.methods.isOwner().call();
     dispatch({ type: "SET_USER_ISADMIN", payload: _isAdmin });
+    const _staked = await c.methods.exchangeTokenStaked().call();
+    dispatch({ type: "SET_USER_STAKED", payload: _staked.toString() });
     const _balance = await c.methods.exchangeTokenBalance().call();
     dispatch({ type: "SET_USER_BALANCE", payload: _balance.toString() });
     const _numberCompanies = await c.methods.numberOfOwnedCompanies().call();
@@ -127,6 +149,9 @@ export default function NavBar() {
       const companySharesForSales = await companyContract.methods
         .allowance(companyOwner, c.options.address)
         .call();
+      const companyTotalSupply = await companyContract.methods
+        .totalSupply()
+        .call();
       dispatch({
         type: "ADD_EXCHANGE_COMPANY",
         payload: {
@@ -137,6 +162,7 @@ export default function NavBar() {
             owner: companyOwner,
             sharesForSale: companySharesForSales,
             pricePerShare: companyPrice,
+            totalSupply: companyTotalSupply,
             contract: companyContract
           }
         }
@@ -168,6 +194,26 @@ export default function NavBar() {
           />
         </Toolbar>
       </AppBar>
+      <Paper className={classes.balanceBar}>
+        <Grid container alignItems="flex-end" direction="column">
+          <Grid item component={Link} to="User">
+            <Typography variant="body2" color="textPrimary" noWrap>
+              EE$ Staked Amt:{" "}
+              {state.account &&
+                state.contract &&
+                state.web3.utils.fromWei(state.userStaked)}
+            </Typography>
+          </Grid>
+          <Grid item component={Link} to="User">
+            <Typography variant="body2" color="textSecondary" noWrap>
+              EE$ Balance Amt:{" "}
+              {state.account &&
+                state.contract &&
+                state.web3.utils.fromWei(state.userBalance)}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Paper>
     </React.Fragment>
   );
 }

@@ -5,6 +5,126 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "branchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "__AssertPostCoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "branchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "__AssertPreCoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "branchId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "locationIdx",
+          "type": "uint256"
+        }
+      ],
+      "name": "__BranchCoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "lineNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "__CoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fnId",
+          "type": "uint256"
+        }
+      ],
+      "name": "__FunctionCoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "statementId",
+          "type": "uint256"
+        }
+      ],
+      "name": "__StatementCoverageIPrivateCompanyFactory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
           "internalType": "address",
           "name": "owner",
@@ -52,25 +172,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0xe0b26c55b2b6092a011a4ab94ea6d6e40c316961cc519ee061d095c69133ecba\",\"urls\":[\"bzz-raw://44cb0774887f46d9ae9eaece0229ce4e3de88e1d1024d8b33af98bfa66028f8e\",\"dweb:/ipfs/Qma7uAMzAoFV4ZGDeoTSGYRf4Jzc1jibdD9rwKNjw2hjJH\"]},\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0x93d9fe3c3b944a90e31db0e4320e1a5aa5c1337c4050811647146cda97e5d940\",\"urls\":[\"bzz-raw://1b49b788ce0625e0bcdfd2ce6d766ed34986a4bb21d2fafb39d37a289df5e88c\",\"dweb:/ipfs/QmdgwfEsFNB78L6Binyrsu7oPQCu2VMARGU2Mj7FrnuApR\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"branchId\",\"type\":\"uint256\"}],\"name\":\"__AssertPostCoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"branchId\",\"type\":\"uint256\"}],\"name\":\"__AssertPreCoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"branchId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"locationIdx\",\"type\":\"uint256\"}],\"name\":\"__BranchCoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"lineNumber\",\"type\":\"uint256\"}],\"name\":\"__CoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fnId\",\"type\":\"uint256\"}],\"name\":\"__FunctionCoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"fileName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"statementId\",\"type\":\"uint256\"}],\"name\":\"__StatementCoverageIPrivateCompanyFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0x0bc3e4390b71249448fa2a8359ee4540e661c26b2b44dea0993e324d780a15cc\",\"urls\":[\"bzz-raw://840906a497c395c2eb8ba2c5f6ec038b302b5df92b16b01e391de7a6d9df8aee\",\"dweb:/ipfs/QmP2EDkVkUR7zSnRRqVcqpVYpwmZv6pg4DxuQZqyt3uMDQ\"]},\"/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0xe9fd339a67a260d0fb1b53696b547413a58c6dcf38120907226f28af4d20eef2\",\"urls\":[\"bzz-raw://3e85fef7fe180d95440b1128da6cdbf1a40f948d83c74030b3433afaf6973bd9\",\"dweb:/ipfs/QmeZfdRNzpiZuEds7q8iYnazFYX2yG1oNQufbyXJJgMHDE\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.5.12;\nimport \"./IPrivateCompany.sol\";\n\ninterface IPrivateCompanyFactory {\n    event newCompanyCreated(address indexed owner, address indexed company);\n    function newCompany(address intendedOwner, string calldata name, string calldata symbol) external returns (address);\n}",
-  "sourcePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+  "source": "pragma solidity 0.5.12;\nimport \"./IPrivateCompany.sol\";\n\ninterface IPrivateCompanyFactory {event __CoverageIPrivateCompanyFactory(string fileName, uint256 lineNumber);\nevent __FunctionCoverageIPrivateCompanyFactory(string fileName, uint256 fnId);\nevent __StatementCoverageIPrivateCompanyFactory(string fileName, uint256 statementId);\nevent __BranchCoverageIPrivateCompanyFactory(string fileName, uint256 branchId, uint256 locationIdx);\nevent __AssertPreCoverageIPrivateCompanyFactory(string fileName, uint256 branchId);\nevent __AssertPostCoverageIPrivateCompanyFactory(string fileName, uint256 branchId);\n\n    event newCompanyCreated(address indexed owner, address indexed company);\n    function newCompany(address intendedOwner, string calldata name, string calldata symbol) external returns (address);\n}",
+  "sourcePath": "/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompanyFactory.sol",
   "ast": {
-    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
-        129
+        205
       ]
     },
-    "id": 130,
+    "id": 206,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 110,
+        "id": 148,
         "literals": [
           "solidity",
           "0.5",
@@ -80,12 +200,12 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
-        "id": 111,
+        "id": 149,
         "nodeType": "ImportDirective",
-        "scope": 130,
-        "sourceUnit": 109,
+        "scope": 206,
+        "sourceUnit": 147,
         "src": "24:31:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -96,9 +216,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 129,
+        "id": 205,
         "linearizedBaseContracts": [
-          129
+          205
         ],
         "name": "IPrivateCompanyFactory",
         "nodeType": "ContractDefinition",
@@ -106,21 +226,462 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 117,
-            "name": "newCompanyCreated",
+            "id": 155,
+            "name": "__CoverageIPrivateCompanyFactory",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 116,
+              "id": 154,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 113,
+                  "id": 151,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 155,
+                  "src": "130:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 150,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "130:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 153,
+                  "indexed": false,
+                  "name": "lineNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 155,
+                  "src": "147:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 152,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "147:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "129:37:1"
+            },
+            "src": "91:76:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 161,
+            "name": "__FunctionCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 160,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 157,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 161,
+                  "src": "215:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 156,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 159,
+                  "indexed": false,
+                  "name": "fnId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 161,
+                  "src": "232:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 158,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "232:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "214:31:1"
+            },
+            "src": "168:78:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 167,
+            "name": "__StatementCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 166,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 163,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 167,
+                  "src": "295:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 162,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "295:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 165,
+                  "indexed": false,
+                  "name": "statementId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 167,
+                  "src": "312:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 164,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "294:38:1"
+            },
+            "src": "247:86:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 175,
+            "name": "__BranchCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 169,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "379:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 168,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "379:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 171,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "396:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 170,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "396:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 173,
+                  "indexed": false,
+                  "name": "locationIdx",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "414:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "414:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "378:56:1"
+            },
+            "src": "334:101:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 181,
+            "name": "__AssertPreCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 180,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 177,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 181,
+                  "src": "484:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 176,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "484:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 179,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 181,
+                  "src": "501:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 178,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "501:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "483:35:1"
+            },
+            "src": "436:83:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 187,
+            "name": "__AssertPostCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 186,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 183,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 187,
+                  "src": "569:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 182,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "569:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 185,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 187,
+                  "src": "586:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 184,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "586:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "568:35:1"
+            },
+            "src": "520:84:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 193,
+            "name": "newCompanyCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 192,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 189,
                   "indexed": true,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 117,
-                  "src": "120:21:1",
+                  "scope": 193,
+                  "src": "634:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -128,10 +689,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 112,
+                    "id": 188,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "120:7:1",
+                    "src": "634:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -143,12 +704,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 115,
+                  "id": 191,
                   "indexed": true,
                   "name": "company",
                   "nodeType": "VariableDeclaration",
-                  "scope": 117,
-                  "src": "143:23:1",
+                  "scope": 193,
+                  "src": "657:23:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -156,10 +717,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 114,
+                    "id": 190,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "143:7:1",
+                    "src": "657:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -170,30 +731,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "119:48:1"
+              "src": "633:48:1"
             },
-            "src": "96:72:1"
+            "src": "610:72:1"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 128,
+            "id": 204,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "newCompany",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 124,
+              "id": 200,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 119,
+                  "id": 195,
                   "name": "intendedOwner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "193:21:1",
+                  "scope": 204,
+                  "src": "707:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -201,10 +762,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 118,
+                    "id": 194,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "193:7:1",
+                    "src": "707:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -216,11 +777,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 121,
+                  "id": 197,
                   "name": "name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "216:20:1",
+                  "scope": 204,
+                  "src": "730:20:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -228,10 +789,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 120,
+                    "id": 196,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "216:6:1",
+                    "src": "730:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -242,11 +803,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 123,
+                  "id": 199,
                   "name": "symbol",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "238:22:1",
+                  "scope": 204,
+                  "src": "752:22:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -254,10 +815,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 122,
+                    "id": 198,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:6:1",
+                    "src": "752:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -267,19 +828,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "192:69:1"
+              "src": "706:69:1"
             },
             "returnParameters": {
-              "id": 127,
+              "id": 203,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 126,
+                  "id": 202,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "280:7:1",
+                  "scope": 204,
+                  "src": "794:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -287,10 +848,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 125,
+                    "id": 201,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "280:7:1",
+                    "src": "794:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -301,33 +862,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "279:9:1"
+              "src": "793:9:1"
             },
-            "scope": 129,
-            "src": "173:116:1",
+            "scope": 205,
+            "src": "687:116:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 130,
-        "src": "57:234:1"
+        "scope": 206,
+        "src": "57:748:1"
       }
     ],
-    "src": "0:291:1"
+    "src": "0:805:1"
   },
   "legacyAST": {
-    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
-        129
+        205
       ]
     },
-    "id": 130,
+    "id": 206,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 110,
+        "id": 148,
         "literals": [
           "solidity",
           "0.5",
@@ -337,12 +898,12 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shuloh/Code/entangle-exchange/coverageEnv/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
-        "id": 111,
+        "id": 149,
         "nodeType": "ImportDirective",
-        "scope": 130,
-        "sourceUnit": 109,
+        "scope": 206,
+        "sourceUnit": 147,
         "src": "24:31:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -353,9 +914,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 129,
+        "id": 205,
         "linearizedBaseContracts": [
-          129
+          205
         ],
         "name": "IPrivateCompanyFactory",
         "nodeType": "ContractDefinition",
@@ -363,21 +924,462 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 117,
-            "name": "newCompanyCreated",
+            "id": 155,
+            "name": "__CoverageIPrivateCompanyFactory",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 116,
+              "id": 154,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 113,
+                  "id": 151,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 155,
+                  "src": "130:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 150,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "130:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 153,
+                  "indexed": false,
+                  "name": "lineNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 155,
+                  "src": "147:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 152,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "147:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "129:37:1"
+            },
+            "src": "91:76:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 161,
+            "name": "__FunctionCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 160,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 157,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 161,
+                  "src": "215:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 156,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 159,
+                  "indexed": false,
+                  "name": "fnId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 161,
+                  "src": "232:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 158,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "232:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "214:31:1"
+            },
+            "src": "168:78:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 167,
+            "name": "__StatementCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 166,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 163,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 167,
+                  "src": "295:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 162,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "295:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 165,
+                  "indexed": false,
+                  "name": "statementId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 167,
+                  "src": "312:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 164,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "294:38:1"
+            },
+            "src": "247:86:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 175,
+            "name": "__BranchCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 169,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "379:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 168,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "379:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 171,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "396:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 170,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "396:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 173,
+                  "indexed": false,
+                  "name": "locationIdx",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 175,
+                  "src": "414:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "414:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "378:56:1"
+            },
+            "src": "334:101:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 181,
+            "name": "__AssertPreCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 180,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 177,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 181,
+                  "src": "484:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 176,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "484:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 179,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 181,
+                  "src": "501:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 178,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "501:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "483:35:1"
+            },
+            "src": "436:83:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 187,
+            "name": "__AssertPostCoverageIPrivateCompanyFactory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 186,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 183,
+                  "indexed": false,
+                  "name": "fileName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 187,
+                  "src": "569:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 182,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "569:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 185,
+                  "indexed": false,
+                  "name": "branchId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 187,
+                  "src": "586:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 184,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "586:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "568:35:1"
+            },
+            "src": "520:84:1"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 193,
+            "name": "newCompanyCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 192,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 189,
                   "indexed": true,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 117,
-                  "src": "120:21:1",
+                  "scope": 193,
+                  "src": "634:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -385,10 +1387,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 112,
+                    "id": 188,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "120:7:1",
+                    "src": "634:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -400,12 +1402,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 115,
+                  "id": 191,
                   "indexed": true,
                   "name": "company",
                   "nodeType": "VariableDeclaration",
-                  "scope": 117,
-                  "src": "143:23:1",
+                  "scope": 193,
+                  "src": "657:23:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -413,10 +1415,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 114,
+                    "id": 190,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "143:7:1",
+                    "src": "657:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -427,30 +1429,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "119:48:1"
+              "src": "633:48:1"
             },
-            "src": "96:72:1"
+            "src": "610:72:1"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 128,
+            "id": 204,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "newCompany",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 124,
+              "id": 200,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 119,
+                  "id": 195,
                   "name": "intendedOwner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "193:21:1",
+                  "scope": 204,
+                  "src": "707:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -458,10 +1460,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 118,
+                    "id": 194,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "193:7:1",
+                    "src": "707:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -473,11 +1475,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 121,
+                  "id": 197,
                   "name": "name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "216:20:1",
+                  "scope": 204,
+                  "src": "730:20:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -485,10 +1487,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 120,
+                    "id": 196,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "216:6:1",
+                    "src": "730:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -499,11 +1501,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 123,
+                  "id": 199,
                   "name": "symbol",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "238:22:1",
+                  "scope": 204,
+                  "src": "752:22:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -511,10 +1513,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 122,
+                    "id": 198,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:6:1",
+                    "src": "752:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -524,19 +1526,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "192:69:1"
+              "src": "706:69:1"
             },
             "returnParameters": {
-              "id": 127,
+              "id": 203,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 126,
+                  "id": 202,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 128,
-                  "src": "280:7:1",
+                  "scope": 204,
+                  "src": "794:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -544,10 +1546,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 125,
+                    "id": 201,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "280:7:1",
+                    "src": "794:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -558,20 +1560,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "279:9:1"
+              "src": "793:9:1"
             },
-            "scope": 129,
-            "src": "173:116:1",
+            "scope": 205,
+            "src": "687:116:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 130,
-        "src": "57:234:1"
+        "scope": 206,
+        "src": "57:748:1"
       }
     ],
-    "src": "0:291:1"
+    "src": "0:805:1"
   },
   "compiler": {
     "name": "solc",
@@ -579,7 +1581,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-25T07:52:23.074Z",
+  "updatedAt": "2019-10-27T06:16:24.818Z",
   "devdoc": {
     "methods": {}
   },
