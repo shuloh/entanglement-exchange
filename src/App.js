@@ -3,7 +3,6 @@ import Home from "./Home";
 import { StoreProvider } from "./Store";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
 import NavBar from "./NavBar";
 import User from "./User";
 import About from "./About";

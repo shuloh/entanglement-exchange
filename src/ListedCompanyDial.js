@@ -5,18 +5,28 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
+import { useSnackbar } from "notistack";
 import { Store } from "./Store";
 
 export default function ListedCompanyDial(props) {
   const { state, dispatch } = useContext(Store);
+  const [buySharesCost, setBuySharesCost] = React.useState("0");
   const [buyShares, setBuyShares] = React.useState(0);
   const [listShares, setListShares] = React.useState(0);
+  const [delistShares, setDelistShares] = React.useState(0);
   const [mintShares, setMintShares] = React.useState(0);
+  const { enqueueSnackbar } = useSnackbar();
   const handleBuyShares = () => async event => {
     setBuyShares(event.target.value);
+    setBuySharesCost(
+      event.target.value * state.web3.utils.fromWei(props.company.pricePerShare)
+    );
   };
   const handleListShares = () => async event => {
     setListShares(event.target.value);
+  };
+  const handleDelistShares = () => async event => {
+    setDelistShares(event.target.value);
   };
   const handleMintShares = () => async event => {
     setMintShares(event.target.value);
@@ -24,14 +34,36 @@ export default function ListedCompanyDial(props) {
   const buySharesTransaction = async () => {
     if (state.contract) {
       const c = state.contract;
-      console.log(props.address);
-      console.log(buyShares);
       await c.methods
         .buyCompanyShares(
           props.address,
           state.web3.utils.toWei(Number(buyShares).toFixed(18))
         )
         .send();
+      const remainingShares = await props.company.contract.methods
+        .allowance(props.company.owner, state.exchangeAddress)
+        .call();
+      dispatch({
+        type: "UPDATE_EXCHANGE_COMPANY",
+        payload: {
+          address: props.address,
+          key: "sharesForSale",
+          value: remainingShares
+        }
+      });
+      const newTokenBalance = await c.methods.exchangeTokenBalance().call();
+      dispatch({
+        type: "SET_USER_BALANCE",
+        payload: newTokenBalance
+      });
+      const newTokenStaked = await c.methods.exchangeTokenStaked().call();
+      dispatch({
+        type: "SET_USER_STAKED",
+        payload: newTokenStaked
+      });
+      enqueueSnackbar("Buy shares transaction successful", {
+        variant: "success"
+      });
     }
   };
   const mintSharesTransaction = async () => {
@@ -49,8 +81,9 @@ export default function ListedCompanyDial(props) {
           value: newSupply
         }
       });
-
-      console.log(result);
+      enqueueSnackbar("Mint shares transaction successful", {
+        variant: "success"
+      });
     }
   };
   const listSharesTransaction = async () => {
@@ -71,13 +104,38 @@ export default function ListedCompanyDial(props) {
           value: newSharesListed
         }
       });
-
-      console.log(result);
+      enqueueSnackbar("List shares transaction successful", {
+        variant: "success"
+      });
+    }
+  };
+  const delistSharesTransaction = async () => {
+    if (props.company.contract) {
+      const c = props.company.contract;
+      const result = await c.methods
+        .decreaseAllowance(
+          state.exchangeAddress,
+          state.web3.utils.toWei(Number(delistShares).toFixed(18))
+        )
+        .send();
+      const newSharesListed = result.events.Approval.returnValues.value;
+      dispatch({
+        type: "UPDATE_EXCHANGE_COMPANY",
+        payload: {
+          address: props.address,
+          key: "sharesForSale",
+          value: newSharesListed
+        }
+      });
+      enqueueSnackbar("Delist shares transaction successful", {
+        variant: "success"
+      });
     }
   };
   return (
     <React.Fragment>
       <Dialog
+        maxWidth="xl"
         open={props.open}
         onClose={props.handleClose}
         aria-labelledby="form-dialog-title"
@@ -100,6 +158,7 @@ export default function ListedCompanyDial(props) {
                 }}
                 margin="normal"
                 variant="outlined"
+                helperText={"Cost in EE$: " + buySharesCost}
               />
             </Grid>
             <Grid item zeroMinWidth>
@@ -140,6 +199,32 @@ export default function ListedCompanyDial(props) {
                     onClick={listSharesTransaction}
                   >
                     list
+                  </Button>
+                </Grid>
+                <Grid item zeroMinWidth>
+                  <TextField
+                    key="delistShares"
+                    id="delistShares"
+                    label="Delist No. of Shares"
+                    value={delistShares}
+                    onChange={handleDelistShares()}
+                    type="number"
+                    inputProps={{ step: "0.01", min: "0.000000000000000001" }}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item zeroMinWidth>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    onClick={delistSharesTransaction}
+                  >
+                    delist
                   </Button>
                 </Grid>
               </Grid>

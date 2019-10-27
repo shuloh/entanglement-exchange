@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserCapabilities() {
   const classes = useStyles();
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const [increaseStakeTokens, setIncreaseStakeTokens] = useState(0.01);
   const [decreaseStakeTokens, setDecreaseStakeTokens] = useState(0.01);
   const [buyTokens, setBuyTokens] = useState(0.01);
@@ -45,6 +45,12 @@ export default function UserCapabilities() {
   };
   const handleBuyTokens = () => async event => {
     setBuyTokens(event.target.value);
+  };
+  const handleIncreaseStakeTokens = () => async event => {
+    setIncreaseStakeTokens(event.target.value);
+  };
+  const handleDecreaseStakeTokens = () => async event => {
+    setDecreaseStakeTokens(event.target.value);
   };
   const createNewCompanyAndListTransaction = async () => {
     if (state.contract) {
@@ -64,32 +70,104 @@ export default function UserCapabilities() {
       await c.methods.buyExchangeToken().send({
         value: state.web3.utils.toWei(Number(buyTokens).toFixed(18))
       });
+      setBuyTokens(0.01);
     }
   };
   const decreaseStakeExchangeTokenTransaction = async () => {
     if (state.exchangeToken) {
       const c = state.exchangeToken;
-      await c.methods
-        .decreaseAllowance(state.exchangeAddress, decreaseStakeTokens)
-        .send({
-          value: state.web3.utils.toWei(Number(state.transactBuyEE).toFixed(18))
-        });
+      const result = await c.methods
+        .decreaseAllowance(
+          state.exchangeAddress,
+          state.web3.utils.toWei(Number(decreaseStakeTokens).toFixed(18))
+        )
+        .send();
+      const newStake = result.events.Approval.returnValues.value;
+      setDecreaseStakeTokens(0.01);
+      dispatch({ type: "SET_USER_STAKED", payload: newStake });
     }
   };
   const increaseStakeExchangeTokenTransaction = async () => {
     if (state.exchangeToken) {
       const c = state.exchangeToken;
-      await c.methods
-        .increaseAllowance(state.exchangeAddress, increaseStakeTokens)
-        .send({
-          value: state.web3.utils.toWei(Number(state.transactBuyEE).toFixed(18))
-        });
+      const result = await c.methods
+        .increaseAllowance(
+          state.exchangeAddress,
+          state.web3.utils.toWei(Number(increaseStakeTokens).toFixed(18))
+        )
+        .send();
+      const newStake = result.events.Approval.returnValues.value;
+      setIncreaseStakeTokens(0.01);
+      dispatch({ type: "SET_USER_STAKED", payload: newStake });
     }
   };
   return (
     <React.Fragment>
       <Paper className={classes.container}>
         <Grid container direction="column">
+          <Grid item>
+            <Typography variant="h6" noWrap>
+              Stake Exchange Tokens (EE$)
+            </Typography>
+            <Grid container direction="row" alignItems="center">
+              <Grid item>
+                <TextField
+                  key="IncreaseStake"
+                  id="DecreaseStake"
+                  label="Amount Of EE$"
+                  value={increaseStakeTokens}
+                  onChange={handleIncreaseStakeTokens()}
+                  type="number"
+                  inputProps={{ step: "0.01", min: "0.000000000000000001" }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  className={classes.button}
+                  onClick={increaseStakeExchangeTokenTransaction}
+                >
+                  increase
+                </Button>
+              </Grid>
+              <Grid item>
+                <TextField
+                  key="DecreaseStake"
+                  id="DecreaseStake"
+                  label="Amount Of EE$"
+                  value={decreaseStakeTokens}
+                  onChange={handleDecreaseStakeTokens()}
+                  type="number"
+                  inputProps={{ step: "0.01", min: "0.000000000000000001" }}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  className={classes.button}
+                  onClick={decreaseStakeExchangeTokenTransaction}
+                >
+                  decrease
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
           <Grid item>
             <Typography variant="h6" noWrap>
               Buy Exchange Tokens (EE$)
@@ -120,7 +198,7 @@ export default function UserCapabilities() {
                   className={classes.button}
                   onClick={buyExchangeTokenTransaction}
                 >
-                  send
+                  buy
                 </Button>
               </Grid>
             </Grid>
