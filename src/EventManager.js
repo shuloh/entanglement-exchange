@@ -48,6 +48,9 @@ export default function EventManager() {
         const companySharesForSales = await companyContract.methods
           .allowance(companyOwner, exchangeAddress)
           .call();
+        const companyTotalSupply = await companyContract.methods
+          .totalSupply()
+          .call();
         dispatch({
           type: "ADD_EXCHANGE_COMPANY",
           payload: {
@@ -58,6 +61,7 @@ export default function EventManager() {
               owner: companyOwner,
               sharesForSale: companySharesForSales,
               pricePerShare: companyPrice,
+              totalSupply: companyTotalSupply,
               contract: companyContract
             }
           }
@@ -111,6 +115,19 @@ export default function EventManager() {
         { variant: "success" }
       );
     };
+    const userAllowanceUpdated = async () => {
+      const _oldAllowance = latestState.current.userStaked;
+      const _allowance = await latestState.current.contract.methods
+        .exchangeTokenStaked()
+        .call();
+      const _oldDisplay = latestState.current.web3.utils.fromWei(_oldAllowance);
+      const _newDisplay = latestState.current.web3.utils.fromWei(_allowance);
+      dispatch({ type: "SET_USER_STAKED", payload: _allowance });
+      enqueueSnackbar(
+        `Updated user staked from ${_oldDisplay} to ${_newDisplay}`,
+        { variant: "success" }
+      );
+    };
     if (state.exchangeToken && state.account) {
       state.exchangeToken.events
         .allEvents()
@@ -121,9 +138,14 @@ export default function EventManager() {
                 event.returnValues.from === state.account ||
                 event.returnValues.to === state.account
               ) {
-                return userBalanceUpdated();
+                userBalanceUpdated();
               }
-              return null;
+              break;
+            case "Approval":
+              if (event.returnValues.owner === state.account) {
+                userAllowanceUpdated();
+              }
+
             default:
               return null;
           }

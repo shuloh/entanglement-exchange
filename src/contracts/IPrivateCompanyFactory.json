@@ -52,15 +52,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0xd5c3d82dea65a6ce3920090f21fa19bcfc6c0ab6022ec02bbd64905d8ff23fe5\",\"urls\":[\"bzz-raw://dba08744fbdbbf904c9248bb2b58e2019ac9da472369f355851534c262b948bd\",\"dweb:/ipfs/QmVtsNsoP1ii4UKGPvHAKKGPkbsGuimr4vqfEcMQ3rWHGP\"]},\"/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0x93d9fe3c3b944a90e31db0e4320e1a5aa5c1337c4050811647146cda97e5d940\",\"urls\":[\"bzz-raw://1b49b788ce0625e0bcdfd2ce6d766ed34986a4bb21d2fafb39d37a289df5e88c\",\"dweb:/ipfs/QmdgwfEsFNB78L6Binyrsu7oPQCu2VMARGU2Mj7FrnuApR\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"newCompanyCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"intendedOwner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"}],\"name\":\"newCompany\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":\"IPrivateCompanyFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol\":{\"keccak256\":\"0xd5c3d82dea65a6ce3920090f21fa19bcfc6c0ab6022ec02bbd64905d8ff23fe5\",\"urls\":[\"bzz-raw://dba08744fbdbbf904c9248bb2b58e2019ac9da472369f355851534c262b948bd\",\"dweb:/ipfs/QmVtsNsoP1ii4UKGPvHAKKGPkbsGuimr4vqfEcMQ3rWHGP\"]},\"/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol\":{\"keccak256\":\"0xdc7d6fb05e479abe5a464dc5798615f30133fa879d6aad957f27bd1420402419\",\"urls\":[\"bzz-raw://bc9b133cf914f4e3d8b76c280297dc0bcb2155e249f802670e3a75d0784834f0\",\"dweb:/ipfs/QmPCqGcrjLZ8gpT7oK9ZwJuncfyXuZzuPtQeCNfNnZfyKg\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.5.12;\nimport \"./IPrivateCompany.sol\";\n\ninterface IPrivateCompanyFactory {\n    event newCompanyCreated(address indexed owner, address indexed company);\n    function newCompany(address intendedOwner, string calldata name, string calldata symbol) external returns (address);\n}",
-  "sourcePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+  "source": "pragma solidity 0.5.12;\nimport \"./IPrivateCompany.sol\";\n\ninterface IPrivateCompanyFactory {\n    event newCompanyCreated(address indexed owner, address indexed company);\n\n    function newCompany(\n        address intendedOwner,\n        string calldata name,\n        string calldata symbol\n    ) external returns (address);\n}",
+  "sourcePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
   "ast": {
-    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
         134
@@ -80,7 +80,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
         "id": 116,
         "nodeType": "ImportDirective",
@@ -193,7 +193,7 @@
                   "name": "intendedOwner",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "193:21:1",
+                  "src": "203:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -204,7 +204,7 @@
                     "id": 123,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "193:7:1",
+                    "src": "203:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -220,7 +220,7 @@
                   "name": "name",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "216:20:1",
+                  "src": "234:20:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -231,7 +231,7 @@
                     "id": 125,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "216:6:1",
+                    "src": "234:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -246,7 +246,7 @@
                   "name": "symbol",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "238:22:1",
+                  "src": "264:22:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -257,7 +257,7 @@
                     "id": 127,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:6:1",
+                    "src": "264:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -267,7 +267,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "192:69:1"
+              "src": "193:99:1"
             },
             "returnParameters": {
               "id": 132,
@@ -279,7 +279,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "280:7:1",
+                  "src": "311:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -290,7 +290,7 @@
                     "id": 130,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "280:7:1",
+                    "src": "311:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -301,23 +301,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "279:9:1"
+              "src": "310:9:1"
             },
             "scope": 134,
-            "src": "173:116:1",
+            "src": "174:146:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 135,
-        "src": "57:234:1"
+        "src": "57:265:1"
       }
     ],
-    "src": "0:291:1"
+    "src": "0:322:1"
   },
   "legacyAST": {
-    "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
+    "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompanyFactory.sol",
     "exportedSymbols": {
       "IPrivateCompanyFactory": [
         134
@@ -337,7 +337,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/home/shuloh/Code/entangle-exchange/contracts/IPrivateCompany.sol",
+        "absolutePath": "/home/shups/Code/entangle-exchange/contracts/IPrivateCompany.sol",
         "file": "./IPrivateCompany.sol",
         "id": 116,
         "nodeType": "ImportDirective",
@@ -450,7 +450,7 @@
                   "name": "intendedOwner",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "193:21:1",
+                  "src": "203:21:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -461,7 +461,7 @@
                     "id": 123,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "193:7:1",
+                    "src": "203:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -477,7 +477,7 @@
                   "name": "name",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "216:20:1",
+                  "src": "234:20:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -488,7 +488,7 @@
                     "id": 125,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "216:6:1",
+                    "src": "234:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -503,7 +503,7 @@
                   "name": "symbol",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "238:22:1",
+                  "src": "264:22:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -514,7 +514,7 @@
                     "id": 127,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:6:1",
+                    "src": "264:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -524,7 +524,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "192:69:1"
+              "src": "193:99:1"
             },
             "returnParameters": {
               "id": 132,
@@ -536,7 +536,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 133,
-                  "src": "280:7:1",
+                  "src": "311:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -547,7 +547,7 @@
                     "id": 130,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "280:7:1",
+                    "src": "311:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -558,20 +558,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "279:9:1"
+              "src": "310:9:1"
             },
             "scope": 134,
-            "src": "173:116:1",
+            "src": "174:146:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 135,
-        "src": "57:234:1"
+        "src": "57:265:1"
       }
     ],
-    "src": "0:291:1"
+    "src": "0:322:1"
   },
   "compiler": {
     "name": "solc",
@@ -579,7 +579,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-27T15:29:57.760Z",
+  "updatedAt": "2019-10-28T03:24:22.400Z",
   "devdoc": {
     "methods": {}
   },

@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Fab from "@material-ui/core/Fab";
 import ListedCompanyCard from "./ListedCompanyCard";
 import ListedCompanyDial from "./ListedCompanyDial";
+import AddIcon from "@material-ui/icons/Add";
 import { Store } from "./Store";
+import ListedCompanyAddNew from "./ListedCompanyAddNew";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +26,7 @@ export default function Home() {
   const [company, setCompany] = React.useState({});
   const [address, setAddress] = React.useState("");
 
+  const [newCompanyOpen, setNewCompanyOpen] = React.useState(false);
   const handleClickOpen = address => event => {
     setOpen(true);
     setAddress(address);
@@ -31,6 +35,9 @@ export default function Home() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const newCompanyClose = () => {
+    setNewCompanyOpen(false);
   };
   return (
     <React.Fragment>
@@ -42,6 +49,18 @@ export default function Home() {
           alignItems="flex-start"
           spacing={2}
         >
+          <Grid item>
+            <Fab
+              color="primary"
+              aria-label="add"
+              className={classes.fab}
+              onClick={() => {
+                setNewCompanyOpen(true);
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          </Grid>
           {Object.keys(state.exchangeCompanies).map(address => (
             <Grid item key={address}>
               <ListedCompanyCard
@@ -54,12 +73,15 @@ export default function Home() {
           ))}
         </Grid>
       </Paper>
+      <ListedCompanyAddNew
+        open={newCompanyOpen}
+        handleClose={newCompanyClose}
+      />
       <ListedCompanyDial
         open={open}
         address={address}
         company={company}
         handleClose={handleClose}
-        aria-labelledby="form-dialog-title"
       />
     </React.Fragment>
   );

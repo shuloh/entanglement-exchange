@@ -255,7 +255,7 @@ export default function ListedCompanyDial(props) {
                     variant="contained"
                     onClick={mintSharesTransaction}
                   >
-                    list
+                    mint
                   </Button>
                 </Grid>
               </Grid>

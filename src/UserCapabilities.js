@@ -252,52 +252,6 @@ export default function UserCapabilities() {
               </Grid>
             </Grid>
           </Grid>
-          <Typography variant="h6">
-            Create Company and List on Exchange
-          </Typography>
-          <Box display="flex" alignItems="center">
-            <TextField
-              id="CompanyName"
-              label="Company Name"
-              className={classes.textField}
-              value={newCompany.name}
-              onChange={handleNewCompany("name")}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              id="CompanySymbol"
-              label="Company Symbol"
-              className={classes.textField}
-              value={newCompany.symbol}
-              onChange={handleNewCompany("symbol")}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              id="PricePerShare"
-              label="Price per 1 unit share (EE$)"
-              value={newCompany.price}
-              onChange={handleNewCompany("price")}
-              type="number"
-              inputProps={{ step: "0.01", min: "0.000000000000000001" }}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true
-              }}
-              margin="normal"
-              variant="outlined"
-            />
-            <Button
-              color="primary"
-              size="large"
-              variant="contained"
-              className={classes.button}
-              onClick={createNewCompanyAndListTransaction}
-            >
-              send
-            </Button>
-          </Box>
         </Grid>
       </Paper>
     </React.Fragment>
