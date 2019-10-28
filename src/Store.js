@@ -4,7 +4,6 @@ export const Store = React.createContext();
 
 const initialState = {
   sideBarOpen: false,
-  adminPanelOpen: false,
 
   web3: null,
   network: null,
