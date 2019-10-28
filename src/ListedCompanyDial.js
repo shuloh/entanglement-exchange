@@ -62,6 +62,15 @@ export default function ListedCompanyDial(props) {
         type: "SET_USER_STAKED",
         payload: newTokenStaked
       });
+      const ownedShares = await c.methods.balanceOf(state.account).call();
+      dispatch({
+        type: "UPDATE_EXCHANGE_COMPANY",
+        payload: {
+          address: props.address,
+          key: "ownedShares",
+          value: ownedShares
+        }
+      });
       setBuyShares("0");
       setBuySharesCost("0");
       enqueueSnackbar("Buy shares transaction successful", {
