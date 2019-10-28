@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -79,6 +80,15 @@ export default function ListedCompanyDial(props) {
           address: props.address,
           key: "totalSupply",
           value: newSupply
+        }
+      });
+      const ownedShares = await c.methods.balanceOf(state.account).call();
+      dispatch({
+        type: "UPDATE_EXCHANGE_COMPANY",
+        payload: {
+          address: props.address,
+          key: "ownedShares",
+          value: ownedShares
         }
       });
       setMintShares("0");
@@ -177,6 +187,9 @@ export default function ListedCompanyDial(props) {
           </Grid>
           {props.company.owner === state.account && (
             <React.Fragment>
+              <Typography variant="subtitle1" color="textSecondary">
+                Owner Functions:
+              </Typography>
               <Grid container direction="row" alignItems="center" spacing={2}>
                 <Grid item zeroMinWidth>
                   <TextField

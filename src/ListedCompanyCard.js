@@ -33,7 +33,7 @@ export default function ListedCompanyCard(props) {
         <Typography variant="h6" className={classes.pos} color="textSecondary">
           {state.exchangeCompanies[props.address].name}
         </Typography>
-        <Typography variant="body2" noWrap>
+        <Typography variant="body2" noWrap color="textSecondary">
           Address: {props.address}
           {<br />}
           Price/Share:{" "}
@@ -49,6 +49,13 @@ export default function ListedCompanyCard(props) {
           Total Supply:{" "}
           {state.web3.utils.fromWei(
             state.exchangeCompanies[props.address].totalSupply.toString()
+          )}
+        </Typography>
+        <Typography variant="body2" noWrap color="textPrimary">
+          {<br />}
+          Shares Owned:{" "}
+          {state.web3.utils.fromWei(
+            state.exchangeCompanies[props.address].ownedShares.toString()
           )}
         </Typography>
         <Fab

@@ -51,6 +51,9 @@ export default function EventManager() {
         const companyTotalSupply = await companyContract.methods
           .totalSupply()
           .call();
+        const _ownedShares = await companyContract.methods
+          .balanceOf(state.contract.options.from)
+          .call();
         dispatch({
           type: "ADD_EXCHANGE_COMPANY",
           payload: {
@@ -62,6 +65,7 @@ export default function EventManager() {
               sharesForSale: companySharesForSales,
               pricePerShare: companyPrice,
               totalSupply: companyTotalSupply,
+              ownedShares: _ownedShares,
               contract: companyContract
             }
           }
@@ -76,8 +80,8 @@ export default function EventManager() {
       }
     };
 
-    if (state.contract) {
-      state.contract.events
+    if (latestState.current.contract) {
+      latestState.current.contract.events
         .allEvents()
         .on("data", event => {
           switch (event.event) {
@@ -96,15 +100,15 @@ export default function EventManager() {
         })
         .on("error", console.error);
     }
-  }, [state.contract, state.account, dispatch, enqueueSnackbar]);
+  }, [state.contract, dispatch, enqueueSnackbar]);
   useEffect(() => {
     const userBalanceUpdated = async () => {
-      const _oldBalance = latestState.current.userBalance;
+      const _oldBalance = Object.assign(latestState.current.userBalance);
       const _balance = await latestState.current.contract.methods
         .exchangeTokenBalance()
         .call();
       const _oldBalanceDisplay = latestState.current.web3.utils.fromWei(
-        _oldBalance
+        _oldBalance.toString()
       );
       const _newBalanceDisplay = latestState.current.web3.utils.fromWei(
         _balance
@@ -116,11 +120,13 @@ export default function EventManager() {
       );
     };
     const userAllowanceUpdated = async () => {
-      const _oldAllowance = latestState.current.userStaked;
+      const _oldAllowance = Object.assign(latestState.current.userStaked);
       const _allowance = await latestState.current.contract.methods
         .exchangeTokenStaked()
         .call();
-      const _oldDisplay = latestState.current.web3.utils.fromWei(_oldAllowance);
+      const _oldDisplay = latestState.current.web3.utils.fromWei(
+        _oldAllowance.toString()
+      );
       const _newDisplay = latestState.current.web3.utils.fromWei(_allowance);
       dispatch({ type: "SET_USER_STAKED", payload: _allowance });
       enqueueSnackbar(
@@ -128,30 +134,30 @@ export default function EventManager() {
         { variant: "success" }
       );
     };
-    if (state.exchangeToken && state.account) {
-      state.exchangeToken.events
+    if (latestState.current.exchangeToken) {
+      latestState.current.exchangeToken.events
         .allEvents()
         .on("data", event => {
           switch (event.event) {
             case "Transfer":
               if (
-                event.returnValues.from === state.account ||
-                event.returnValues.to === state.account
+                event.returnValues.from === latestState.current.account ||
+                event.returnValues.to === latestState.current.account
               ) {
                 userBalanceUpdated();
               }
               break;
             case "Approval":
-              if (event.returnValues.owner === state.account) {
+              if (event.returnValues.owner === latestState.current.account) {
                 userAllowanceUpdated();
               }
-
+              break;
             default:
-              return null;
+              break;
           }
         })
         .on("error", console.error);
     }
-  }, [state.exchangeToken, state.account, dispatch, enqueueSnackbar]);
+  }, [state.exchangeToken, dispatch, enqueueSnackbar]);
   return null;
 }

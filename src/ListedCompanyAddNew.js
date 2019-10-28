@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 export default function ListedCompanyAddNew(props) {
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const classes = useStyles();
   const [newCompany, setNewCompany] = useState({
     name: "",
@@ -49,6 +49,17 @@ export default function ListedCompanyAddNew(props) {
           state.web3.utils.toWei(newCompany.price)
         )
         .send();
+      setNewCompany({ name: "", symbol: "", price: 0 });
+      const _numberCompanies = await state.contract.methods
+        .numberOfOwnedCompanies()
+        .call();
+      dispatch({ type: "SET_USER_NUMBERCOMPANIES", payload: _numberCompanies });
+      for (let i = 0; i < _numberCompanies; i++) {
+        const ownedCompany = await state.contract.methods
+          .ownerCompanies(state.account, i)
+          .call();
+        dispatch({ type: "ADD_USER_OWNEDCOMPANIES", payload: ownedCompany });
+      }
     }
   };
   return (

@@ -14,7 +14,7 @@ import PrivateExchangeLogic from "./contracts/PrivateExchangeLogic.json";
 import PrivateCompany from "./contracts/PrivateCompany.json";
 import { Link } from "react-router-dom";
 import { useSnackbar } from "notistack";
-
+import indigo from "@material-ui/core/colors/indigo";
 import { Store } from "./Store";
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     noWrap: true
   },
   balanceBar: {
-    padding: theme.spacing(1, 5, 1, 5)
+    backgroundColor: indigo[900],
+    padding: theme.spacing(1, 3, 1, 3)
   }
 }));
 
@@ -79,10 +80,10 @@ export default function NavBar() {
       const web3 = await getWeb3();
       if (window.ethereum) {
         window.ethereum.on("accountsChanged", accounts => {
-          storeWeb3Contract(web3);
+          window.location.reload(true);
         });
         window.ethereum.on("networkChanged", accounts => {
-          storeWeb3Contract(web3);
+          window.location.reload(true);
         });
       }
       dispatch({
@@ -152,6 +153,9 @@ export default function NavBar() {
       const companyTotalSupply = await companyContract.methods
         .totalSupply()
         .call();
+      const _ownedShares = await companyContract.methods
+        .balanceOf(account)
+        .call();
       dispatch({
         type: "ADD_EXCHANGE_COMPANY",
         payload: {
@@ -163,6 +167,7 @@ export default function NavBar() {
             sharesForSale: companySharesForSales,
             pricePerShare: companyPrice,
             totalSupply: companyTotalSupply,
+            ownedShares: _ownedShares,
             contract: companyContract
           }
         }
@@ -195,22 +200,39 @@ export default function NavBar() {
         </Toolbar>
       </AppBar>
       <Paper className={classes.balanceBar}>
-        <Grid container alignItems="flex-end" direction="column">
-          <Grid item component={Link} to="User">
-            <Typography variant="body2" color="textPrimary" noWrap>
-              EE$ Staked Amt:{" "}
-              {state.account &&
-                state.contract &&
-                state.web3.utils.fromWei(state.userStaked)}
+        <Grid
+          container
+          alignItems="flex-start"
+          direction="row"
+          justify="space-between"
+        >
+          <Grid item>
+            <Typography variant="subtitle1" color="textPrimary" noWrap>
+              Exchange Status:{" "}
+              {state.account && state.contract && state.exchangeIsOpen
+                ? "open"
+                : "closed"}
             </Typography>
           </Grid>
-          <Grid item component={Link} to="User">
-            <Typography variant="body2" color="textSecondary" noWrap>
-              EE$ Balance Amt:{" "}
-              {state.account &&
-                state.contract &&
-                state.web3.utils.fromWei(state.userBalance)}
-            </Typography>
+          <Grid item>
+            <Grid container alignItems="flex-end" direction="column">
+              <Grid item component={Link} to="User">
+                <Typography variant="subtitle1" color="textPrimary" noWrap>
+                  EE$ Staked Amt:{" "}
+                  {state.account &&
+                    state.contract &&
+                    state.web3.utils.fromWei(state.userStaked)}
+                </Typography>
+              </Grid>
+              <Grid item component={Link} to="User">
+                <Typography variant="subtitle1" color="textSecondary" noWrap>
+                  EE$ Balance Amt:{" "}
+                  {state.account &&
+                    state.contract &&
+                    state.web3.utils.fromWei(state.userBalance)}
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>

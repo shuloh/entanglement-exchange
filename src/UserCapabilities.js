@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -36,15 +35,6 @@ export default function UserCapabilities() {
   const [decreaseStakeTokens, setDecreaseStakeTokens] = useState("0");
   const [buyTokens, setBuyTokens] = useState("0");
   const [sellTokens, setSellTokens] = useState("0");
-  const [newCompany, setNewCompany] = useState({
-    name: "",
-    symbol: "",
-    price: 0
-  });
-
-  const handleNewCompany = name => event => {
-    setNewCompany({ ...newCompany, [name]: event.target.value.toString() });
-  };
 
   const handleBuyTokens = () => async event => {
     setBuyTokens(event.target.value.toString());
@@ -60,19 +50,6 @@ export default function UserCapabilities() {
 
   const handleDecreaseStakeTokens = () => async event => {
     setDecreaseStakeTokens(event.target.value.toString());
-  };
-
-  const createNewCompanyAndListTransaction = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      await c.methods
-        .createCompanyAndList(
-          newCompany.name,
-          newCompany.symbol,
-          state.web3.utils.toWei(newCompany.price)
-        )
-        .send();
-    }
   };
 
   const buyExchangeTokenTransaction = async () => {
