@@ -1315,10 +1315,92 @@
       "links": {},
       "address": "0xf87865c9d5d27d48410f291FDB46A6EB35d34a11",
       "transactionHash": "0x97a7ce866884bc6607713a22ac5395609017a4f84aedaaaea30187b69a38d75d"
+    },
+    "1572324501352": {
+      "events": {
+        "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "previousAdmin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminChanged",
+          "type": "event",
+          "signature": "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f"
+        },
+        "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "Upgraded",
+          "type": "event",
+          "signature": "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b"
+        }
+      },
+      "links": {},
+      "address": "0xBD9B9a833dffa9b11aD9e8C5d093Fa298B5435b1",
+      "transactionHash": "0xd2ed4e431b6d97ec2b7ea98a35384ac55497337630e380f00b39057699fb88f2"
+    },
+    "1572327155449": {
+      "events": {
+        "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "previousAdmin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminChanged",
+          "type": "event",
+          "signature": "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f"
+        },
+        "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "Upgraded",
+          "type": "event",
+          "signature": "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b"
+        }
+      },
+      "links": {},
+      "address": "0xBD9B9a833dffa9b11aD9e8C5d093Fa298B5435b1",
+      "transactionHash": "0xd2ed4e431b6d97ec2b7ea98a35384ac55497337630e380f00b39057699fb88f2"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-29T01:51:51.750Z",
+  "updatedAt": "2019-10-29T05:32:42.467Z",
   "devdoc": {
     "methods": {
       "admin()": {
