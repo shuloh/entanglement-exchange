@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import getWeb3 from "./utils/getWeb3";
 import TemporaryDrawer from "./NavDrawer";
@@ -38,44 +39,11 @@ export default function NavBar() {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { enqueueSnackbar } = useSnackbar();
-  const storeWeb3Contract = async web3 => {
-    try {
-      const accounts = await web3.eth.getAccounts();
-      const account = accounts[0];
-      dispatch({
-        type: "SET_ACCOUNT",
-        payload: account
-      });
-      enqueueSnackbar("Account initialized", { variant: "success" });
-      const networkId = await web3.eth.net.getId();
-      dispatch({
-        type: "SET_NETWORK",
-        payload: networkId
-      });
-      const deployedProxy = PrivateExchangeProxy.networks[networkId];
-      const instance = new web3.eth.Contract(
-        PrivateExchangeLogic.abi,
-        deployedProxy.address,
-        {
-          from: account
-        }
-      );
-      dispatch({
-        type: "SET_CONTRACT",
-        payload: instance
-      });
-      enqueueSnackbar("Contract initialized", { variant: "success" });
-      await exchangeDetails(web3, instance, account);
-      await userDetails(instance, account);
-    } catch (error) {
-      console.log(error);
-      enqueueSnackbar("Error with contract initialization", {
-        variant: "error"
-      });
-    }
-  };
   const connectWeb3 = async () => {
     try {
+      dispatch({
+        type: "LOADING"
+      });
       //store web3 for contract interaction in whole app
       const web3 = await getWeb3();
       if (window.ethereum) {
@@ -90,15 +58,65 @@ export default function NavBar() {
         type: "SET_WEB3",
         payload: web3
       });
-      storeWeb3Contract(web3);
+      await storeWeb3Contract(web3);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       enqueueSnackbar("Error with web3 connection", { variant: "error" });
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
     }
   };
-  const userDetails = async (c, account) => {
+  const storeWeb3Contract = async web3 => {
+    try {
+      const accounts = await web3.eth.getAccounts();
+      const account = accounts[0];
+      dispatch({
+        type: "SET_ACCOUNT",
+        payload: account
+      });
+      enqueueSnackbar("Account initialized", { variant: "success" });
+      const networkId = await web3.eth.net.getId();
+      dispatch({
+        type: "SET_NETWORK",
+        payload: networkId
+      });
+      let deployedAddress = PrivateExchangeProxy.networks[networkId].address;
+      if (networkId === 3) {
+        console.log("ropsten detected, resolving address using ENS");
+        try {
+          deployedAddress = await web3.eth.ens.getAddress(state.ropstenENS);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      const instance = new web3.eth.Contract(
+        PrivateExchangeLogic.abi,
+        deployedAddress,
+        {
+          from: account
+        }
+      );
+      dispatch({
+        type: "SET_CONTRACT",
+        payload: instance
+      });
+      enqueueSnackbar("Contract initialized", { variant: "success" });
+      await exchangeDetails(web3, instance, account);
+      await userDetails(web3, instance, account);
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar("Error with contract initialization", {
+        variant: "error"
+      });
+    }
+  };
+  const userDetails = async (web3, c, account) => {
     const _isAdmin = await c.methods.isOwner().call();
     dispatch({ type: "SET_USER_ISADMIN", payload: _isAdmin });
+    const _ethBalance = await web3.eth.getBalance(account);
+    dispatch({ type: "SET_USER_ETHBALANCE", payload: _ethBalance.toString() });
     const _staked = await c.methods.exchangeTokenStaked().call();
     dispatch({ type: "SET_USER_STAKED", payload: _staked.toString() });
     const _balance = await c.methods.exchangeTokenBalance().call();
@@ -180,7 +198,10 @@ export default function NavBar() {
         <Toolbar>
           <TemporaryDrawer />
           <Typography variant="h6" className={classes.title} noWrap>
-            Entanglement-Exchange
+            Entangle-Exchange
+            <Typography variant="subtitle1" color="textPrimary" noWrap>
+              {state.network === 3 ? '@ ropsten "entangle.eth"' : null}
+            </Typography>
           </Typography>
           <FormControlLabel
             classes={{
@@ -189,13 +210,17 @@ export default function NavBar() {
             control={
               <Switch
                 color="default"
-                checked={state.account !== null}
-                disabled={state.account !== null}
+                checked={state.account !== null && state.contract != null}
+                disabled={state.account !== null && state.contract != null}
                 onChange={connectWeb3}
                 aria-label="Connect"
               />
             }
-            label={state.account ? state.account : "Connect web3"}
+            label={
+              state.account && state.contract
+                ? "User: " + state.account
+                : "Connect web3"
+            }
           />
         </Toolbar>
       </AppBar>
@@ -207,18 +232,31 @@ export default function NavBar() {
           justify="space-between"
         >
           <Grid item>
-            <Typography variant="subtitle1" color="textPrimary" noWrap>
-              Exchange Status:{" "}
-              {state.account && state.contract && state.exchangeIsOpen
-                ? "open"
-                : "closed"}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Grid container alignItems="flex-end" direction="column">
+            <Grid container alignItems="flex-start" direction="column">
+              <Grid item>
+                <Typography variant="subtitle1" color="textPrimary" noWrap>
+                  Exchange Status:{" "}
+                  {state.account && state.contract
+                    ? state.exchangeIsOpen
+                      ? "Open"
+                      : "Closed"
+                    : null}
+                </Typography>
+              </Grid>
               <Grid item component={Link} to="User">
                 <Typography variant="subtitle1" color="textPrimary" noWrap>
-                  EE$ Staked Amt:{" "}
+                  Ether Balance:{" "}
+                  {state.account &&
+                    state.web3.utils.fromWei(state.userEthBalance)}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container alignItems="flex-start" direction="column">
+              <Grid item component={Link} to="User">
+                <Typography variant="subtitle1" color="textPrimary" noWrap>
+                  EE$ Allowance:{" "}
                   {state.account &&
                     state.contract &&
                     state.web3.utils.fromWei(state.userStaked)}
@@ -226,16 +264,17 @@ export default function NavBar() {
               </Grid>
               <Grid item component={Link} to="User">
                 <Typography variant="subtitle1" color="textSecondary" noWrap>
-                  EE$ Balance Amt:{" "}
+                  EE$ Balance:{" "}
                   {state.account &&
                     state.contract &&
-                    state.web3.utils.fromWei(state.userBalance)}
+                    state.web3.utils.fromWei(state.userBalance.toString())}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Paper>
+      {state.loading && <LinearProgress color="secondary" />}
     </React.Fragment>
   );
 }

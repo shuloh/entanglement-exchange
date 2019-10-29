@@ -4,6 +4,8 @@ export const Store = React.createContext();
 
 const initialState = {
   sideBarOpen: false,
+  loading: false,
+  ropstenENS: "entangle.eth",
 
   web3: null,
   network: null,
@@ -11,6 +13,7 @@ const initialState = {
   contract: null,
 
   userIsAdmin: false,
+  userEthBalance: "0",
   userBalance: "0",
   userStaked: "0",
   userNumberCompanies: 0,
@@ -26,6 +29,10 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "LOADING":
+      return { ...state, loading: true };
+    case "LOADED":
+      return { ...state, loading: false };
     case "SIDE_DRAWER":
       return { ...state, sideBarOpen: action.payload };
     case "ADMINPANEL_OPEN":
@@ -40,6 +47,8 @@ function reducer(state, action) {
       return { ...state, contract: action.payload };
     case "SET_USER_ISADMIN":
       return { ...state, userIsAdmin: action.payload };
+    case "SET_USER_ETHBALANCE":
+      return { ...state, userEthBalance: action.payload };
     case "SET_USER_BALANCE":
       return { ...state, userBalance: action.payload };
     case "SET_USER_STAKED":

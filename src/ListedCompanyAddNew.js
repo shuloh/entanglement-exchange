@@ -40,26 +40,43 @@ export default function ListedCompanyAddNew(props) {
     setNewCompany({ ...newCompany, [name]: event.target.value.toString() });
   };
   const createNewCompanyAndListTransaction = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      await c.methods
-        .createCompanyAndList(
-          newCompany.name,
-          newCompany.symbol,
-          state.web3.utils.toWei(newCompany.price)
-        )
-        .send();
-      setNewCompany({ name: "", symbol: "", price: 0 });
-      const _numberCompanies = await state.contract.methods
-        .numberOfOwnedCompanies()
-        .call();
-      dispatch({ type: "SET_USER_NUMBERCOMPANIES", payload: _numberCompanies });
-      for (let i = 0; i < _numberCompanies; i++) {
-        const ownedCompany = await state.contract.methods
-          .ownerCompanies(state.account, i)
+    try {
+      dispatch({
+        type: "LOADING"
+      });
+      if (state.contract) {
+        const c = state.contract;
+        await c.methods
+          .createCompanyAndList(
+            newCompany.name,
+            newCompany.symbol,
+            state.web3.utils.toWei(newCompany.price)
+          )
+          .send();
+        setNewCompany({ name: "", symbol: "", price: 0 });
+        const _numberCompanies = await state.contract.methods
+          .numberOfOwnedCompanies()
           .call();
-        dispatch({ type: "ADD_USER_OWNEDCOMPANIES", payload: ownedCompany });
+        dispatch({
+          type: "SET_USER_NUMBERCOMPANIES",
+          payload: _numberCompanies
+        });
+        for (let i = 0; i < _numberCompanies; i++) {
+          const ownedCompany = await state.contract.methods
+            .ownerCompanies(state.account, i)
+            .call();
+          dispatch({ type: "ADD_USER_OWNEDCOMPANIES", payload: ownedCompany });
+        }
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
       }
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
     }
   };
   return (
@@ -107,6 +124,7 @@ export default function ListedCompanyAddNew(props) {
               variant="outlined"
             />
             <Button
+              disabled={state.loading}
               color="primary"
               size="large"
               variant="contained"

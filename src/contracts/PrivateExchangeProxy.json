@@ -1234,6 +1234,47 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "previousAdmin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminChanged",
+          "type": "event",
+          "signature": "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f"
+        },
+        "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "Upgraded",
+          "type": "event",
+          "signature": "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b"
+        }
+      },
+      "links": {},
+      "address": "0x10A3115A55dF39502e6eC85Eb7166233aA3Bd0C3",
+      "transactionHash": "0x3ec7441743f06d7ebe53def874f34cd4847876531091ea513f1198fc26456554"
+    },
     "7777777": {
       "events": {
         "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f": {
@@ -1272,12 +1313,12 @@
         }
       },
       "links": {},
-      "address": "0xB0f728444115D87f2aBD84b15a065E1339E35e1F",
-      "transactionHash": "0xa5b50455891259d8d76e3a5cddce838c5ea356aebd1dda8aca3f6267c9410dd7"
+      "address": "0xf87865c9d5d27d48410f291FDB46A6EB35d34a11",
+      "transactionHash": "0x97a7ce866884bc6607713a22ac5395609017a4f84aedaaaea30187b69a38d75d"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-28T12:33:03.282Z",
+  "updatedAt": "2019-10-29T01:51:51.750Z",
   "devdoc": {
     "methods": {
       "admin()": {

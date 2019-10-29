@@ -20393,6 +20393,185 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0xa39712bf91bafb8d6072436e7684fba9a926b318358ebf63ef1aeeb24b9a82d1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "company",
+              "type": "address"
+            }
+          ],
+          "name": "CompanyDelisted",
+          "type": "event",
+          "signature": "0xa39712bf91bafb8d6072436e7684fba9a926b318358ebf63ef1aeeb24b9a82d1"
+        },
+        "0xf4ce8b96113eecaf9c3e4e02dc4345eb4fd136a5ba35ab5dba6c7ae82f7d5d72": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "company",
+              "type": "address"
+            }
+          ],
+          "name": "CompanyListed",
+          "type": "event",
+          "signature": "0xf4ce8b96113eecaf9c3e4e02dc4345eb4fd136a5ba35ab5dba6c7ae82f7d5d72"
+        },
+        "0xec8e3a2619b5eaca43073fc46aa092d4c9d58e3332506a2f6967bda9578933a0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "company",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            }
+          ],
+          "name": "CompanyPriceUpdated",
+          "type": "event",
+          "signature": "0xec8e3a2619b5eaca43073fc46aa092d4c9d58e3332506a2f6967bda9578933a0"
+        },
+        "0xe3e6ecd3c9014a95ac75a3756472b14f530f21ac013840eff43cb402205fdb9c": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "ExchangeClosed",
+          "type": "event",
+          "signature": "0xe3e6ecd3c9014a95ac75a3756472b14f530f21ac013840eff43cb402205fdb9c"
+        },
+        "0xc2320542f27067faab4fb23c212d85b173ce523f95ed8fe6938a321d6855fee9": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "ExchangeOpened",
+          "type": "event",
+          "signature": "0xc2320542f27067faab4fb23c212d85b173ce523f95ed8fe6938a321d6855fee9"
+        },
+        "0x3239ac9c3e521589db4968fa4558c881b4d4a59208af0fd54c7b5b141fe583e4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "ExchangeTokenBought",
+          "type": "event",
+          "signature": "0x3239ac9c3e521589db4968fa4558c881b4d4a59208af0fd54c7b5b141fe583e4"
+        },
+        "0x1b517f8ad58b0ae87f4f34a486a008f9263f83ff416e263f1695a070262269bf": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "ExchangeTokenSold",
+          "type": "event",
+          "signature": "0x1b517f8ad58b0ae87f4f34a486a008f9263f83ff416e263f1695a070262269bf"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        },
+        "0x520d7599dc1568f101febb1a97b5297f877f744199a603449874ae8826f57c9e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "company",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "seller",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            }
+          ],
+          "name": "ShareTransaction",
+          "type": "event",
+          "signature": "0x520d7599dc1568f101febb1a97b5297f877f744199a603449874ae8826f57c9e"
+        }
+      },
+      "links": {},
+      "address": "0xB3782F57BeF52A70b088AB9d463F69b0c3D737D8",
+      "transactionHash": "0x228faa47abf138b0862fdccf8f55aa81002d3f6965e43ce0f86082ccceb8b15c"
+    },
     "7777777": {
       "events": {
         "0xf4ce8b96113eecaf9c3e4e02dc4345eb4fd136a5ba35ab5dba6c7ae82f7d5d72": {
@@ -20589,12 +20768,12 @@
         }
       },
       "links": {},
-      "address": "0x0B69fCf6b1E154424B179e626e7069DDD8d305B0",
-      "transactionHash": "0xf0fa68b5526a8034046e9cc4e1984470a50afc1cd4badd69a232980503bef583"
+      "address": "0x18cA8dcF2B7C6f9237572f97078c6c24f451Eabd",
+      "transactionHash": "0x9d74673b4a122aebbb4e4559289dcda459acd012f3c12e57ab50a3bae0a54e9d"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-28T12:33:03.290Z",
+  "updatedAt": "2019-10-29T01:51:51.765Z",
   "devdoc": {
     "author": "Jordan Loh Shu Peng",
     "methods": {

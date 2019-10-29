@@ -12,10 +12,11 @@ import { Store } from "./Store";
 export default function ListedCompanyDial(props) {
   const { state, dispatch } = useContext(Store);
   const [buySharesCost, setBuySharesCost] = React.useState("0");
-  const [buyShares, setBuyShares] = React.useState(0);
-  const [listShares, setListShares] = React.useState(0);
-  const [delistShares, setDelistShares] = React.useState(0);
-  const [mintShares, setMintShares] = React.useState(0);
+  const [buyShares, setBuyShares] = React.useState("0");
+  const [updatePrice, setUpdatePrice] = React.useState("0");
+  const [listShares, setListShares] = React.useState("0");
+  const [delistShares, setDelistShares] = React.useState("0");
+  const [mintShares, setMintShares] = React.useState("0");
   const { enqueueSnackbar } = useSnackbar();
   const handleBuyShares = () => async event => {
     setBuyShares(event.target.value.toString());
@@ -25,6 +26,9 @@ export default function ListedCompanyDial(props) {
         state.web3.utils.fromWei(props.company.pricePerShare)
       ).toString()
     );
+  };
+  const handleUpdatePrice = () => async event => {
+    setUpdatePrice(event.target.value.toString());
   };
   const handleListShares = () => async event => {
     setListShares(event.target.value.toString());
@@ -36,121 +40,241 @@ export default function ListedCompanyDial(props) {
     setMintShares(event.target.value.toString());
   };
   const buySharesTransaction = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      await c.methods
-        .buyCompanyShares(props.address, state.web3.utils.toWei(buyShares))
-        .send();
-      const remainingShares = await props.company.contract.methods
-        .allowance(props.company.owner, state.exchangeAddress)
-        .call();
+    try {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "sharesForSale",
-          value: remainingShares
-        }
+        type: "LOADING"
       });
-      const newTokenBalance = await c.methods.exchangeTokenBalance().call();
+      if (state.contract) {
+        const c = state.contract;
+        await c.methods
+          .buyCompanyShares(props.address, state.web3.utils.toWei(buyShares))
+          .send();
+        const remainingShares = await props.company.contract.methods
+          .allowance(props.company.owner, state.exchangeAddress)
+          .call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "sharesForSale",
+            value: remainingShares
+          }
+        });
+        const newTokenBalance = await c.methods.exchangeTokenBalance().call();
+        dispatch({
+          type: "SET_USER_BALANCE",
+          payload: newTokenBalance
+        });
+        const newTokenStaked = await c.methods.exchangeTokenStaked().call();
+        dispatch({
+          type: "SET_USER_STAKED",
+          payload: newTokenStaked
+        });
+        const ownedShares = await props.company.contract.methods
+          .balanceOf(state.account)
+          .call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "ownedShares",
+            value: ownedShares
+          }
+        });
+        setBuyShares("0");
+        setBuySharesCost("0");
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+        enqueueSnackbar("Buy shares transaction successful", {
+          variant: "success"
+        });
+      }
+    } finally {
       dispatch({
-        type: "SET_USER_BALANCE",
-        payload: newTokenBalance
+        type: "LOADED"
       });
-      const newTokenStaked = await c.methods.exchangeTokenStaked().call();
+    }
+  };
+  const updatePriceTransaction = async () => {
+    try {
       dispatch({
-        type: "SET_USER_STAKED",
-        payload: newTokenStaked
+        type: "LOADING"
       });
-      const ownedShares = await c.methods.balanceOf(state.account).call();
+      if (state.contract) {
+        const c = state.contract;
+        await c.methods
+          .updateCompanyPrice(
+            props.address,
+            state.web3.utils.toWei(updatePrice)
+          )
+          .send();
+        const newPrice = await c.methods
+          .listedCompanyPrices(props.address)
+          .call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "pricePerShare",
+            value: newPrice
+          }
+        });
+        const newTokenBalance = await c.methods.exchangeTokenBalance().call();
+        dispatch({
+          type: "SET_USER_BALANCE",
+          payload: newTokenBalance
+        });
+        const newTokenStaked = await c.methods.exchangeTokenStaked().call();
+        dispatch({
+          type: "SET_USER_STAKED",
+          payload: newTokenStaked
+        });
+        const ownedShares = await props.company.contract.methods
+          .balanceOf(state.account)
+          .call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "ownedShares",
+            value: ownedShares
+          }
+        });
+        setBuyShares("0");
+        setBuySharesCost("0");
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+        enqueueSnackbar("Buy shares transaction successful", {
+          variant: "success"
+        });
+      }
+    } finally {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "ownedShares",
-          value: ownedShares
-        }
-      });
-      setBuyShares("0");
-      setBuySharesCost("0");
-      enqueueSnackbar("Buy shares transaction successful", {
-        variant: "success"
+        type: "LOADED"
       });
     }
   };
   const mintSharesTransaction = async () => {
-    if (props.company.contract) {
-      const c = props.company.contract;
-      await c.methods.mint(state.web3.utils.toWei(mintShares)).send();
-      const newSupply = await c.methods.totalSupply().call();
+    try {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "totalSupply",
-          value: newSupply
-        }
+        type: "LOADING"
       });
-      const ownedShares = await c.methods.balanceOf(state.account).call();
+      if (props.company.contract) {
+        const c = props.company.contract;
+        await c.methods.mint(state.web3.utils.toWei(mintShares)).send();
+        const newSupply = await c.methods.totalSupply().call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "totalSupply",
+            value: newSupply
+          }
+        });
+        const ownedShares = await c.methods.balanceOf(state.account).call();
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "ownedShares",
+            value: ownedShares
+          }
+        });
+        setMintShares("0");
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+        enqueueSnackbar("Mint shares transaction successful", {
+          variant: "success"
+        });
+      }
+    } finally {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "ownedShares",
-          value: ownedShares
-        }
-      });
-      setMintShares("0");
-      enqueueSnackbar("Mint shares transaction successful", {
-        variant: "success"
+        type: "LOADED"
       });
     }
   };
   const listSharesTransaction = async () => {
-    if (props.company.contract) {
-      const c = props.company.contract;
-      const result = await c.methods
-        .increaseAllowance(
-          state.exchangeAddress,
-          state.web3.utils.toWei(listShares)
-        )
-        .send();
-      const newSharesListed = result.events.Approval.returnValues.value;
+    try {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "sharesForSale",
-          value: newSharesListed
-        }
+        type: "LOADING"
       });
-      setListShares("0");
-      enqueueSnackbar("List shares transaction successful", {
-        variant: "success"
+      if (props.company.contract) {
+        const c = props.company.contract;
+        const result = await c.methods
+          .increaseAllowance(
+            state.exchangeAddress,
+            state.web3.utils.toWei(listShares)
+          )
+          .send();
+        const newSharesListed = result.events.Approval.returnValues.value;
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "sharesForSale",
+            value: newSharesListed
+          }
+        });
+        setListShares("0");
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+        enqueueSnackbar("List shares transaction successful", {
+          variant: "success"
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
       });
     }
   };
   const delistSharesTransaction = async () => {
-    if (props.company.contract) {
-      const c = props.company.contract;
-      const result = await c.methods
-        .decreaseAllowance(
-          state.exchangeAddress,
-          state.web3.utils.toWei(delistShares)
-        )
-        .send();
-      const newSharesListed = result.events.Approval.returnValues.value;
+    try {
       dispatch({
-        type: "UPDATE_EXCHANGE_COMPANY",
-        payload: {
-          address: props.address,
-          key: "sharesForSale",
-          value: newSharesListed
-        }
+        type: "LOADING"
       });
-      setDelistShares("0");
-      enqueueSnackbar("Delist shares transaction successful", {
-        variant: "success"
+      if (props.company.contract) {
+        const c = props.company.contract;
+        const result = await c.methods
+          .decreaseAllowance(
+            state.exchangeAddress,
+            state.web3.utils.toWei(delistShares)
+          )
+          .send();
+        const newSharesListed = result.events.Approval.returnValues.value;
+        dispatch({
+          type: "UPDATE_EXCHANGE_COMPANY",
+          payload: {
+            address: props.address,
+            key: "sharesForSale",
+            value: newSharesListed
+          }
+        });
+        setDelistShares("0");
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+        enqueueSnackbar("Delist shares transaction successful", {
+          variant: "success"
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
       });
     }
   };
@@ -185,6 +309,7 @@ export default function ListedCompanyDial(props) {
             </Grid>
             <Grid item zeroMinWidth>
               <Button
+                disabled={state.loading}
                 color="primary"
                 size="large"
                 variant="contained"
@@ -198,7 +323,36 @@ export default function ListedCompanyDial(props) {
             <React.Fragment>
               <Typography variant="subtitle1" color="textSecondary">
                 Owner Functions:
-              </Typography>
+              </Typography>{" "}
+              <Grid container direction="row" alignItems="center" spacing={2}>
+                <Grid item zeroMinWidth>
+                  <TextField
+                    key="updatePrice"
+                    id="updatePrice"
+                    label="Update Price"
+                    value={updatePrice}
+                    onChange={handleUpdatePrice()}
+                    type="number"
+                    inputProps={{ step: "0.01", min: "0.000000000000000001" }}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item zeroMinWidth>
+                  <Button
+                    disabled={state.loading}
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    onClick={updatePriceTransaction}
+                  >
+                    update
+                  </Button>
+                </Grid>
+              </Grid>
               <Grid container direction="row" alignItems="center" spacing={2}>
                 <Grid item zeroMinWidth>
                   <TextField
@@ -218,6 +372,7 @@ export default function ListedCompanyDial(props) {
                 </Grid>
                 <Grid item zeroMinWidth>
                   <Button
+                    disabled={state.loading}
                     color="primary"
                     size="large"
                     variant="contained"
@@ -244,6 +399,7 @@ export default function ListedCompanyDial(props) {
                 </Grid>
                 <Grid item zeroMinWidth>
                   <Button
+                    disabled={state.loading}
                     color="primary"
                     size="large"
                     variant="contained"
@@ -272,6 +428,7 @@ export default function ListedCompanyDial(props) {
                 </Grid>
                 <Grid item zeroMinWidth>
                   <Button
+                    disabled={state.loading}
                     color="primary"
                     size="large"
                     variant="contained"

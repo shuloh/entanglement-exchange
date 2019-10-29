@@ -18,11 +18,13 @@ export default function About() {
     <React.Fragment>
       <Paper className={classes.root}>
         <Typography variant="body2" noWrap>
-          Exchange Contract Address: {state.exchangeAddress}
+          Exchange Address: {state.exchangeAddress}
         </Typography>
-        <Typography variant="body2" noWrap>
-          Exchange Status: {state.exchangeIsOpen ? "Open" : "Closed"}
-        </Typography>
+        {state.network === 3 && (
+          <Typography variant="body2" noWrap>
+            Exchange Ropsten ENS Name: {state.ropstenENS}
+          </Typography>
+        )}
         <Typography variant="body2" noWrap>
           Exchange Owner: {state.exchangeOwner}
         </Typography>

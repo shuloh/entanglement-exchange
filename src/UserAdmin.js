@@ -27,11 +27,27 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserAdmin() {
   const [adminMode, setAdminMode] = useState(false);
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const classes = useStyles();
   const switchOpenModeTransaction = async () => {
-    const c = state.contract;
-    await c.methods.switchOpenMode(adminMode).send();
+    try {
+      dispatch({
+        type: "LOADING"
+      });
+      if (state.contract) {
+        const c = state.contract;
+        await c.methods.switchOpenMode(adminMode).send();
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
+    }
   };
   return (
     <React.Fragment>
@@ -73,6 +89,7 @@ export default function UserAdmin() {
           </Grid>
           <Grid item>
             <Button
+              disabled={state.loading}
               size="large"
               color="primary"
               variant="contained"

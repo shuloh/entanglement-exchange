@@ -1116,6 +1116,33 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x9867161b60e306feb8dabb8f1dd2c4eb7a3e7e16b07f81a4fb625013f1b6982b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "company",
+              "type": "address"
+            }
+          ],
+          "name": "newCompanyCreated",
+          "type": "event",
+          "signature": "0x9867161b60e306feb8dabb8f1dd2c4eb7a3e7e16b07f81a4fb625013f1b6982b"
+        }
+      },
+      "links": {},
+      "address": "0x362B88D90dda4Ccd0Ca044ED46d7863d07B01545",
+      "transactionHash": "0x63e840d7966c66c3d2119a781811838ac943fd17f3715fdad8fb815268344ad6"
+    },
     "7777777": {
       "events": {
         "0x9867161b60e306feb8dabb8f1dd2c4eb7a3e7e16b07f81a4fb625013f1b6982b": {
@@ -1140,12 +1167,12 @@
         }
       },
       "links": {},
-      "address": "0xbD71A73C1a8b11Afa9Bcf8f549071DD769EA2458",
-      "transactionHash": "0xa5c13cc82b4fbc64cfcf4dc2f367faecc39ef5f9f1f8dfea15ee4dfe1ab199d2"
+      "address": "0x90Df1976271c8c6d40eF7F0c86216a9F4d32DFf8",
+      "transactionHash": "0xba53e19a5cde999f97d592392224b3075d5952f9af394daf9f15d17efc5a086e"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-28T12:33:03.296Z",
+  "updatedAt": "2019-10-29T01:51:51.780Z",
   "devdoc": {
     "methods": {
       "newCompany(address,string,string)": {

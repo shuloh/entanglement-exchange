@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -53,50 +52,102 @@ export default function UserCapabilities() {
   };
 
   const buyExchangeTokenTransaction = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      await c.methods.buyExchangeToken().send({
-        value: state.web3.utils.toWei(buyTokens)
-      });
-      setBuyTokens(0);
+    try {
+      dispatch({ type: "LOADING" });
+      if (state.contract) {
+        const c = state.contract;
+        await c.methods.buyExchangeToken().send({
+          value: state.web3.utils.toWei(buyTokens)
+        });
+        setBuyTokens(0);
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+      }
+    } finally {
+      dispatch({ type: "LOADED" });
     }
   };
 
   const sellExchangeTokenTransaction = async () => {
-    if (state.contract) {
-      const c = state.contract;
-      const amount = state.web3.utils.toWei(sellTokens);
-      await c.methods.sellExchangeToken(amount).send();
-      setSellTokens(0);
+    try {
+      dispatch({
+        type: "LOADING"
+      });
+      if (state.contract) {
+        const c = state.contract;
+        const amount = state.web3.utils.toWei(sellTokens);
+        await c.methods.sellExchangeToken(amount).send();
+        setSellTokens(0);
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
     }
   };
 
   const decreaseStakeExchangeTokenTransaction = async () => {
-    if (state.exchangeToken) {
-      const c = state.exchangeToken;
-      const result = await c.methods
-        .decreaseAllowance(
-          state.exchangeAddress,
-          state.web3.utils.toWei(decreaseStakeTokens)
-        )
-        .send();
-      const newStake = result.events.Approval.returnValues.value;
-      setDecreaseStakeTokens(0);
-      dispatch({ type: "SET_USER_STAKED", payload: newStake });
+    try {
+      dispatch({
+        type: "LOADING"
+      });
+      if (state.exchangeToken) {
+        const c = state.exchangeToken;
+        const result = await c.methods
+          .decreaseAllowance(
+            state.exchangeAddress,
+            state.web3.utils.toWei(decreaseStakeTokens)
+          )
+          .send();
+        const newStake = result.events.Approval.returnValues.value;
+        setDecreaseStakeTokens(0);
+        dispatch({ type: "SET_USER_STAKED", payload: newStake });
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
     }
   };
   const increaseStakeExchangeTokenTransaction = async () => {
-    if (state.exchangeToken) {
-      const c = state.exchangeToken;
-      const result = await c.methods
-        .increaseAllowance(
-          state.exchangeAddress,
-          state.web3.utils.toWei(increaseStakeTokens)
-        )
-        .send();
-      const newStake = result.events.Approval.returnValues.value;
-      setIncreaseStakeTokens(0);
-      dispatch({ type: "SET_USER_STAKED", payload: newStake });
+    try {
+      dispatch({
+        type: "LOADING"
+      });
+      if (state.exchangeToken) {
+        const c = state.exchangeToken;
+        const result = await c.methods
+          .increaseAllowance(
+            state.exchangeAddress,
+            state.web3.utils.toWei(increaseStakeTokens)
+          )
+          .send();
+        const newStake = result.events.Approval.returnValues.value;
+        setIncreaseStakeTokens(0);
+        dispatch({ type: "SET_USER_STAKED", payload: newStake });
+        const _ethBalance = await state.web3.eth.getBalance(state.account);
+        dispatch({
+          type: "SET_USER_ETHBALANCE",
+          payload: _ethBalance.toString()
+        });
+      }
+    } finally {
+      dispatch({
+        type: "LOADED"
+      });
     }
   };
   return (
@@ -104,9 +155,6 @@ export default function UserCapabilities() {
       <Paper className={classes.container}>
         <Grid container direction="column">
           <Grid item>
-            <Typography variant="h6" noWrap>
-              Stake Exchange Tokens (EE$)
-            </Typography>
             <Grid container direction="row" alignItems="center">
               <Grid item>
                 <TextField
@@ -127,6 +175,7 @@ export default function UserCapabilities() {
               </Grid>
               <Grid item>
                 <Button
+                  disabled={state.loading}
                   color="primary"
                   size="large"
                   variant="contained"
@@ -155,6 +204,7 @@ export default function UserCapabilities() {
               </Grid>
               <Grid item>
                 <Button
+                  disabled={state.loading}
                   color="primary"
                   size="large"
                   variant="contained"
@@ -167,9 +217,6 @@ export default function UserCapabilities() {
             </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="h6" noWrap>
-              Buy / Sell Exchange Tokens EE$ for Ethereum
-            </Typography>
             <Grid container direction="row" alignItems="center">
               <Grid item>
                 <TextField
@@ -190,6 +237,7 @@ export default function UserCapabilities() {
               </Grid>
               <Grid item>
                 <Button
+                  disabled={state.loading}
                   color="primary"
                   size="large"
                   variant="contained"
@@ -218,13 +266,14 @@ export default function UserCapabilities() {
               </Grid>
               <Grid item>
                 <Button
+                  disabled={state.loading}
                   color="primary"
                   size="large"
                   variant="contained"
                   className={classes.button}
                   onClick={sellExchangeTokenTransaction}
                 >
-                  sell
+                  sell (from allowance)
                 </Button>
               </Grid>
             </Grid>
