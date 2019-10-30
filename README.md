@@ -1,3 +1,7 @@
+Documentation of the full dApp can be found at
+
+[https://github.com/shuloh/entanglement-smartcontracts](https://github.com/shuloh/entanglement-smartcontracts)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
